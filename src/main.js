@@ -1,8 +1,9 @@
 import Vue from 'vue'
-import App from './App.vue'
+import wrap from './App.vue'
 
 Vue.config.productionTip = false
 
 new Vue({
-  render: h => h(App),
-}).$mount('#app')
+  el: '#wrap',
+  render: h => h(wrap),
+}).$mount('#wrap')

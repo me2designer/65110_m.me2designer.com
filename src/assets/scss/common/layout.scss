@@ -1,0 +1,90 @@
+/* SCSS Document */
+@charset "UTF-8";
+
+
+
+/****************************************************************************
+    layout
+****************************************************************************/
+/* Frame */
+$wrapW: 100%;
+html, body {font-size:10px}
+#wrap {overflow-x:hidden !important;min-width:$wrapW;font-family:"NanumSquare", sans-serif;font-size:1.6rem;letter-spacing:-0.02em}
+#container {background-color:#fff;}
+.inner {padding:0 5.333333333vw}
+
+/* HEADER */ 
+#header {width:100%;height:7.5rem;background-color:rgba(#fff, 0);transition:background-color 0.3s $G-easeHover, box-shadow 0.3s $G-easeHover, transform 0.6s $G-easeHover;}
+#header.header-up {transform:translateY(-100%)}
+#header .inner {display:flex;align-items:center}
+#header .link_home {display:flex;align-items:center;font-size:1.8rem;font-weight:bold;color:#fff;letter-spacing:-0.01em;transition:color 0.3s $G-easeHover}
+#header .link_home svg {fill:#fff;margin-right:0.9rem;font-size:2.6rem}
+#header.header-active {background-color:rgba(#fff, 1);box-shadow:0 0.1rem 1rem rgba(0,0,0,0.05)}
+#header.header-active .link_home {color:#333}
+#header.header-active .link_home svg {fill:$G-colorPrimary}
+
+/* FOOTER */ 
+$footerH: 445px;
+#footer {position:relative;width:100%;height:#{$footerH}}
+
+#footer .footer_overlay {
+    position:fixed;bottom:0;z-index:2;width:100%;height:#{$footerH};background-color:#353535;pointer-events:none;
+}
+
+#footer .footer_inner {
+    display:flex;justify-content:space-between;align-items:center;position:fixed;bottom:0;width:100%;min-width:$wrapW;height:#{$footerH};padding:0 315px 0 75px;transform:translateY(100px);/* transition:0.3s $G-easeHover; */
+}
+
+#footer .footer_inner .left {
+    .tit {
+        margin-bottom:10px;font-family:'OpenSans';font-size:38px;font-weight:800;color:#fff
+    }
+    .desc {
+        margin-bottom:22px;font-size:16px;color:#fff;
+    }
+    .list_sns {
+        display:flex;align-items:center;margin:0 -14px;
+        .link_sns {
+            display:block;padding:0 14px;font-size:29px;line-height:0em;fill:#fff;transition:all 0.3s $G-easeHover;
+            &:hover {
+                fill:$G-colorPrimary;transform:scale(1.2)
+            }
+        }
+    }
+}
+
+#footer .footer_inner .right {
+    .tit {
+        margin-bottom:15px;font-size:50px;color:#fff;font-weight:900;letter-spacing:-0.02em;line-height:1.45em
+    }
+    .desc {
+        font-family:'OpenSans';font-size:21px;color:#fff;
+    }
+}
+
+#footer .footer_bg {
+    position:fixed;top:0;bottom:0;left:0;right:0;z-index:-1;background-color:#292b31;
+}
+
+
+
+/****************************************************************************
+    container
+****************************************************************************/
+/* 공통 */ 
+
+/* 맨 위로 이동하기 */ 
+#aisdeBtnTop {z-index:1;min-width:$wrapW;margin-left:0 !important}
+#aisdeBtnTop .btn_top {display:flex;flex-direction:column;justify-content:center;align-items:center;position:absolute;bottom:-45px;right:75px;z-index:1;width:90px;height:90px;color:#fff;fill:#fff;background:$G-gradPrimary;transition:all 0.4s ease-in-out}
+#aisdeBtnTop .btn_top:hover {animation:aisdeBtnTopHover 0.4s forwards ease-in-out}
+#aisdeBtnTop.fixed .btn_top {bottom:75px}
+#aisdeBtnTop.is-hidden .btn_top {opacity:0;bottom:-45px;pointer-events:none}
+@keyframes aisdeBtnTopHover {
+    20%            {transform:translateY(-10%)}
+    40%            {transform:translateY(5%)}
+    60%            {transform:translateY(-5%)}
+    80%            {transform:translateY(2%)}
+    90%            {transform:translateY(-2%)}
+    100%           {transform:translateY(0%)}
+}
+

@@ -1,0 +1,136 @@
+/* SCSS Document */
+@charset "UTF-8";
+
+
+/****************************************************************************
+    table                                  https://getbootstrap.com 참고함
+****************************************************************************/
+.table {
+    width:100%;border-top:1px solid #707070;border-bottom:1px solid #eee;
+    tbody {
+        tr {
+            td {
+                padding:1.94em 1.33em;border-top:1px solid #eee;font-size:18px;text-align:center;word-break:keep-all;
+                &:nth-child(1) {
+                    border-left:none;
+                }
+            }
+            &:nth-child(1) {
+                td {
+                    border-top:none;
+                }
+            }
+        }
+    }
+}
+
+
+
+/****************************************************************************
+    table-bordered
+****************************************************************************/
+.table-bordered {
+    width:100%;border-top:2px solid #212e50;border-bottom:1px solid #212e50;
+    thead {
+        tr { 
+            th {
+                padding:0.875em 0.667em;border-left:1px solid #ddd;border-bottom:1px solid #ddd;text-align:center;background-color:#f4f4f4;;
+                &:nth-child(1) {
+                    border-left:none;
+                }
+                &[rowspan] {
+                    border-right:1px solid #212e50;;border-bottom:2px solid #212e50;
+                }
+            }
+            &:last-child {
+                th {
+                    border-bottom:1px solid #ddd;
+                }
+            }
+        }
+    }
+    tbody {
+        tr {
+            th {
+                padding:0.875em 0.667em;border-top:1px solid #ddd;border-right:1px solid #ddd;text-align:center;word-break:keep-all;                
+            }
+            td {
+                padding:0.875em 0.667em;border-top:1px solid #ddd;border-right:1px solid #ddd;word-break:keep-all;
+                &:last-child {
+                    border-right:none;
+                }                
+            }
+            &:nth-child(1) {
+                td {
+                    border-top:none;
+                }
+            }
+        }
+    }
+}
+
+
+
+/****************************************************************************
+    table-hover
+****************************************************************************/
+.table-hover {
+    tbody {
+        tr {
+            transition:all 0.3s $G-easeHover;
+            &:hover {
+                background-color:#fafbfb;
+            }
+        }
+    }
+}
+
+.table-hover-anchor {
+    tbody {
+        tr {
+            transition:all 0.3s $G-easeHover;cursor:pointer;
+            &:hover {
+                background-color:#fafbfb;
+            }
+        }        
+    }
+}
+
+
+
+/****************************************************************************
+    table-pagination
+****************************************************************************/
+.table-pagination {
+    width:100%;padding-top:45px;text-align:center;
+    .table-pagination-prev {
+        display:inline-flex;justify-content:center;align-items:center;width:32px;height:32px;margin-right:10px;border:1px solid #a1a1a1;border-radius:100%;font-size:12px;fill:#a1a1a1;transition:all 0.3s #{$G-easeHover};cursor:pointer;
+        &.disable {
+            opacity:0.5;
+        }
+        &:hover:not(.disable) {
+            border:0;fill:#fff;background:#{$G-gradPrimary};            
+        }
+    }
+    .table-pagination-next {
+        display:inline-flex;justify-content:center;align-items:center;width:32px;height:32px;margin-left:10px;border:1px solid #a1a1a1;border-radius:100%;font-size:12px;fill:#a1a1a1;transition:all 0.3s #{$G-easeHover};cursor:pointer;
+        &.disable {
+            opacity:0.5;
+        }
+        &:hover:not(.disable) {
+            border:0;fill:#fff;background:#{$G-gradPrimary};            
+        }
+    }
+    .table-pagination-bullet {
+        display:inline-block;position:relative;margin:0 14px;font-size:18px;font-weight:bold;color:#767676;cursor:pointer;
+        &:hover {
+            color:#{$G-colorPrimary};
+        }
+    }
+    .table-pagination-bullet.on {
+        color:#{$G-colorPrimary};
+        &::after {
+            content:"";position:absolute;left:50%;bottom:0;width:150%;height:2px;background-color:#{$G-colorPrimary};;transform:translateX(-50%);
+        }
+    }
+}

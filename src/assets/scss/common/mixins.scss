@@ -1,0 +1,274 @@
+/* SCSS Document */
+@charset "UTF-8";
+
+
+
+/****************************************************************************
+    IE 브라우저 hack
+****************************************************************************/
+
+
+
+/*
+    [style 작성 예]
+        .선택자 {
+            @include ieHack {
+                display:none;
+            }
+        }
+*/
+
+@mixin ieHack() {
+    @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+        @content;
+    }
+}
+
+
+
+/****************************************************************************
+    clearfix
+****************************************************************************/
+
+
+
+@mixin clearfix {
+    &::after {
+        content:'';display:block;clear:both;
+    }
+}
+
+
+
+/****************************************************************************
+    TEXT 밑줄생성
+****************************************************************************/
+
+
+
+/*
+    [html 작성 예]
+        <p class="선택자">
+            <mark>제목</mark>
+        </p>
+
+    [style 작성 예]
+        .선택자 {
+            @include textMark(#fff,1s);
+        }
+*/
+
+@mixin textMark($bgColor:#ccc, $delay:1s, $height:0.6) {
+    $name: inline-#{unique-id()};
+    display:inline-block;position:relative;z-index:1;line-height:1em;padding:0 0.2em;
+    &::after {
+        content:"";position:absolute;z-index:-1;left:0;bottom:-20%;width:0%;height:#{$height}em;background-color:$bgColor;animation:$name 0.5s $delay forwards cubic-bezier(.73,.01,.48,1.12);
+    }
+    @keyframes #{$name} {
+        100% {width:100%}
+    }
+}
+
+
+
+/****************************************************************************
+    slide Button
+****************************************************************************/
+
+
+
+/*
+    [html 작성 예]
+        <button class="선택자" type="button">
+            <span>버튼명</span>
+            <img src="" data-images-path="/image/svg/next02.svg">
+        </button>
+
+    [style 작성 예]
+        .선택자 {
+            @include slideBtn(300px,#000);
+        }
+*/
+
+@mixin slideBtn($width:auto, $height:54px, $bdc:#000, $fz:18px) {
+    display:flex;justify-content:center;align-items:center;position:relative;z-index:1;width:#{$width};height:#{$height};border:1px solid #{$bdc};
+    &::after {
+        content:"";position:absolute;top:0;bottom:0;left:0;right:100%;z-index:-1;background-color:#{$bdc};transition:all 0.4s ease-in-out;
+    }
+    span {
+        display:block;font-size:#{$fz};color:#{$bdc};line-height:1em;transition:all 0.6s linear;
+    }
+    svg {
+        fill:#{$bdc};margin-left:10px;font-size:1em;padding-top:2px;transition:all 0.6s linear;
+    }
+}
+
+
+
+/*
+    [style 작성 예]
+        &.hover {
+            .선택자 {
+                @include slideBtnHover(#000);
+            }
+        }
+*/
+
+@mixin slideBtnHover($color:#fff) {
+    &::after {
+        right:0;
+    }
+    span {
+        color:#{$color};
+    }
+    svg {
+        fill:#{$color};
+    }
+}
+
+
+
+/****************************************************************************
+    Gradient Button
+****************************************************************************/
+@mixin gradBtn($width:auto, $height:64px, $pd:0 52px, $bdr:2em, $fz:20px) {
+    overflow:hidden;display:inline-flex;justify-content:center;align-items:center;position:relative;z-index:1;width:#{$width};height:#{$height};margin:0 auto;padding:#{$pd};font-size:#{$fz};color:#fff;border-radius:#{$bdr};background:#{$G-gradPrimary};transition:all 0.2s ease-in-out;
+}
+
+
+/****************************************************************************
+    Gradient Slide Button
+****************************************************************************/
+
+
+
+/*
+    [html 작성 예]
+        <button class="선택자" type="button">
+            <span>버튼명</span>
+            <img src="" data-images-path="/image/svg/next02.svg">
+        </button>
+
+    [style 작성 예]
+        .선택자 {
+            @include gradSlideBtn(300px,#000);
+        }
+*/
+
+@mixin gradSlideBtn($width:auto, $height:64px, $pd:0 52px, $bdc:#b4b5b5, $bdr:2em, $fz:20px) {
+    overflow:hidden;display:inline-flex;justify-content:center;align-items:center;position:relative;z-index:1;width:#{$width};height:#{$height};margin:0 auto;padding:#{$pd};font-size:#{$fz};border:solid 1px #{$bdc};border-radius:#{$bdr};line-height:1em;transition:all 0.2s #{$G-easeHover};
+    &::after {
+        content:"";position:absolute;top:0;bottom:0;left:0;right:100%;z-index:-1;background:#{$G-gradPrimary};transition:all 0.4s #{$G-easeHover};
+    }    
+    svg {
+        fill:#000;font-size:0.8em;transition:all 0.2s #{$G-easeHover};
+    }    
+    &:hover, &.on {
+        color:#fff;border-color:transparent;transition:border-color 0.4s 0.2s #{$G-easeHover}, color 0.4s #{$G-easeHover};
+        &::after {
+            right:0;
+        }        
+        svg {
+            fill:#fff;transition:all 0.4s #{$G-easeHover};
+        }
+    }
+}
+
+
+
+/****************************************************************************
+    동영상 play - 아이콘
+****************************************************************************/
+
+
+
+/*
+    [html 작성 예]
+        <i class="선택자"></i>
+
+    [style 작성 예]
+        .선택자 {
+            @include icoPlay;
+        }
+*/
+
+@mixin icoPlay {
+    $name: inline-#{unique-id()};
+    position:absolute;top:50%;left:50%;z-index:1;width:76px;height:76px;border:3px solid #fff;border-radius:100%;background:url(/img/common/ico/play01.png) 55% center no-repeat;background-size:contain;transform:translate(-50%, -50%);transition:all 0.6s ease-in-out;
+    &::before {
+        content:"";position:absolute;top:50%;left:50%;z-index:-1;width:100%;height:100%;margin:-35px 0 0 -35px;border-radius:50%;border:2px solid rgba(255, 255, 255, 0.75);transition:all 0.4s ease-in-out;animation:#{$name} 2s forwards infinite;
+    }
+
+    @keyframes #{$name} {
+        0% {transform:scale(1);box-shadow:inset 0 0 25px 3px rgba(255, 255, 255, 0.75), 0 0 25px 10px rgba(255, 255, 255, 0.75);}
+        100% {transform:scale(1.8);border-color:transparent;box-shadow:none;}
+    }
+}
+
+
+
+/****************************************************************************
+    동영상 play - button
+****************************************************************************/
+
+
+
+/*
+    [html 작성 예]
+        <button class="선택자"></button>
+
+    [style 작성 예]
+        .선택자 {
+            @include videoLayer;
+        }
+*/
+
+@mixin videoLayer($resize:false) {
+    overflow:hidden;position:relative;width:100%;height:100%;
+    .thumb {
+        overflow:hidden;position:relative;
+        &::after {
+            content:"";position:absolute;top:0;bottom:0;left:0;right:0;z-index:0;background-color:#000;opacity:0.1;transition:all 1s linear;
+        }
+        .ico_play {
+            @include icoPlay;
+        }
+        img {
+            display:block;width:100%;height:auto;transition:all 1s linear;
+        }
+    }
+    &:hover {
+        .thumb {
+            &::after {
+                opacity:0.4;transition:all 0.3s ease-in-out;
+            }
+            .ico_play {
+                border-color:#ff6815;background-color:#ff6815;transition:all 0.3s ease-in-out;
+                &::before {
+                   opacity:0;
+                }
+            }
+            img {
+                transform:scale(1.05);transition:all 0.4s ease-in-out;
+            }
+        }
+    }
+    @if $resize == true {
+        background-color:#666;
+        .thumb {
+            position:absolute;top:50%;left:50%;width:100%;height:100%;transform:translate(-50%, -50%);
+            img {
+                position:absolute;top:50%;left:50%;width:100%;height:auto;transform:translate(-50%, -50%);
+            }
+        }
+        &:hover {
+            .thumb {
+                img {
+                    transform:translate(-50%, -50%) scale(1.05);
+                }
+            }
+        }
+    }
+}
+
+
