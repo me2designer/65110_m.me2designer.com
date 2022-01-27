@@ -31,7 +31,7 @@ $(function(){/*
 
     $(window).on('scroll', function () {
         var windowT = $(this).scrollTop();
-        if (windowT >= 50){            
+        if (windowT >= 50){
             if (!status) $header.addClass('header-active');
             status = true;
         } else {
@@ -39,16 +39,19 @@ $(function(){/*
             status = false;
         }
     });
-    
+
 
     var $gnb = $('#gnb');
     var didScroll;
     var lastScrollTop = 0;
     var delta = 5;
     var navbarHeight = $header.outerHeight();
+    var visualH = $('#visual').outerHeight();    
 
-    $(window).scroll(function(event){        
-        if ($gnb.css("display") == "block" ) {
+    $(window).scroll(function(event){
+        var st = $(this).scrollTop();
+        
+        if ($gnb.css("display") == "block" || st <= visualH / 2) {
             return;
         }
         didScroll = true;
@@ -114,7 +117,7 @@ $(function(){/*
             scrollDownAction : function(){
                 // 스크롤 DOWN 액션
                 var $target = $btn.siblings('[data-target="'+id+'"]');
-                
+
 
             },
             scrollUpAction : function(){
@@ -122,7 +125,7 @@ $(function(){/*
                 var $prev = $btn.siblings('[data-target="'+id+'"]').prev();
                 var prevId = $prev.attr('data-target');
                 var $target = $btn.siblings('[data-target="'+prevId+'"]');
-                
+
 
             }
         });
@@ -171,36 +174,6 @@ $(function(){/*
         }
     });
 
-
-
-})();/*
-■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
-*/(function(){
-
-
-
-    var $footer = $('#footer');
-    var footerH = $footer.outerHeight();
-    var status;
-
-    $(window).on('scroll', function () {
-        var scrollBottom = $(window).scrollTop() + $(window).height();
-        var containerH = $('#container').height();
-
-        if (scrollBottom >= containerH){
-            var posT = Math.abs((scrollBottom - containerH) / footerH * 1)
-            var Y = posT >= 1 ? 1 : posT;
-
-            if (status) {
-                $footer.find('.footer_overlay').css('opacity', Math.abs(Y - 1));
-                $footer.find('.footer_inner').css('transform', 'translateY('+Math.abs(Y * 100 - 100)+'px)');
-            }
-            status = true;
-        } else {
-            // if (!status)
-            status = false;
-        }
-    });
 
 
 })();/*

@@ -4,8 +4,7 @@ var ProjectPage = 0;
 $(function(){/*
 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 */(function(){
-
-
+    
 
     /* 사이트 준비중 안내 */
     if(isReal) LAYER('developing');
@@ -19,13 +18,13 @@ $(function(){/*
 
 
     /* 메인 비주얼 */
-    var $wrap = $('#visual');
+    const $wrap = $('#visual');
 
     // swiper
-    var $swiper = $wrap.find('.swiper-container');
-    var slide_length = $swiper.find('.swiper-slide').length;
-    var $progress = $wrap.find('.progress_bar');
-    var swiper = new Swiper($swiper, {
+    let $swiper = $wrap.find('.swiper-container');
+    let slide_length = $swiper.find('.swiper-slide').length;
+    let $progress = $wrap.find('.progress_bar');
+    let swiper = new Swiper($swiper, {
         autoplay: {
             delay: 4000,
             disableOnInteraction : false,
@@ -49,21 +48,11 @@ $(function(){/*
             clickable: true
         },
         on : {
-            slideChangeTransitionStart: function(){
-                var $active = $swiper.find('.swiper-slide[data-swiper-slide-index="'+this.realIndex+'"]');
-                var $next = $swiper.find('.swiper-slide').not('.swiper-slide-duplicate-prev, .swiper-slide-prev');
-
-                //bacground-image animate
-                TweenMax.set($next.find('.bg'), {scale:1});
-                TweenMax.to($active.find('.bg'), 6, {ease:Linear.easeNone, scale:1.15});
-
-                //progress bar
-                $progress.removeClass(function(){
-                    setTimeout(function() {
-                        $progress.addClass('is-active');
-                    }, 300);
-                    return 'is-active';
-                });
+            slideChangeTransitionStart: function() {
+                $progress.removeClass('is-active');
+            },
+            slideChangeTransitionEnd: function() {
+                $progress.addClass('is-active');
             },
         },
     });
@@ -91,7 +80,7 @@ $(function(){/*
 
 
     /* 성장과정 */
-    var $wrap = $('#profile');
+    let $wrap = $('#profile');
 
     // swiper
     var $swiper = $wrap.find('.swiper-container');
@@ -164,8 +153,11 @@ $(function(){/*
 
     /* 프로젝트 */
     let $wrap = $('#project');
+    let $list = $wrap.find('.list_project');
+    let item_copied = $list.find('.item_project').detach();
+    let $btnMore = $wrap.find('.btn_more');
 
-    getList('https://me2designer.com/js/json/project.json', function(infoList) {
+    getList(SERVER.public+'/json/project.json', function(infoList) {
         // 태그(tag) 불러오기
         (function() {
             // tag 배열 합치기
@@ -188,14 +180,15 @@ $(function(){/*
             filter_tag.forEach(function(info) {
                 let $btn_clone = $btn_copied.clone();
                 $btn_clone.html('<span>'+info+'</span>');
+                if (info == '퍼블리싱') $btn_clone.addClass('fw-bold');
                 $btn_clone.appendTo($list);
             });
 
             // click event
             $list.find('.btn_tag').on('click', function(){
-                if ($list.hasClass('is-reset')) $list.removeClass('is-reset').find('.btn_tag').removeClass('on');
+                if ($(this).hasClass('on')) return; //중복클릭 방지
 
-                $(this).toggleClass('on');
+                $(this).addClass('on').siblings().removeClass('on');
 
                 // list 초기화
                 ProjectPage = 0;
@@ -205,163 +198,166 @@ $(function(){/*
         })();
 
         //목록 불러오기
-        (function() {
-            let $list = $wrap.find('.list_project');
-            let item_copied = $list.find('.item_project').detach();
-            let $btnMore = $wrap.find('.btn_more');
+        function appendList(list, idx) {
+            let list_divi = list.arrDivision(4);
 
-            function appendList(list, idx) {
-                let list_divi = list.arrDivision(9);
+            // append
+            list_divi[idx].forEach(function(each) {
+                let $item_clone = item_copied.clone();
 
-                // append
-                list_divi[idx].forEach(function(each) {
-                    let $item_clone = item_copied.clone();
-                    let eachIdx = infoList.findIndex(el => el == each);
-
-
-                    // .inner_default
-                    $item_clone.find('.inner_default .box_thumb img').attr({
-                        'src': '/img/main/project_thumb/'+each.thumb+'',
-                        'alt': each.title
-                    });
-                    $item_clone.find('.inner_default .tit').text(each.title);
-                    $item_clone.find('.inner_default .desc').append('<span>'+each.description+'</span>');
-
-                    for (let i = 0; i < each.tag.length && i < 5; i++) {
-                        $item_clone.find('.inner_default .tag').append('<span>'+each.tag[i]+'</span>');
-                    }
-
-                    // .inner_overlay
-                    $item_clone.find('.inner_overlay .tit').text(each.title);
-                    $item_clone.find('.inner_overlay .desc').text(each.workDesc);
-                    $item_clone.find('.inner_overlay .role').text(String(each.workRole).replace(/,/gi,', '));
-                    $item_clone.find('.inner_overlay .work').text(each.workDate);
-                    $item_clone.find('.inner_overlay .rate').text(each.workRate);
-
-                    // .inner_overlay - .list_more
-                    let $listMore = $item_clone.find('.inner_overlay .list_more');
-
-                    if (each.more) {
-                        if (each.more.link) $listMore.find('.link_more').css('display', 'inline-flex').attr('href',each.more.link);
-                        if (each.more.image) {
-                            let $btnImg = $listMore.find('.btn_image').css('display', 'inline-flex');
-
-                            $btnImg.on('click', function() {
-                                LAYER({
-                                    name : 'projectImage',
-                                    afterLoad : function(){
-                                        let $layer = $('#projectImage_wrap');
-                                        let $swiper = $layer.find('.swiper-container');
-                                        let slide_copied = $swiper.find('.swiper-slide').detach();
-
-                                        // slide_clone
-                                        function runSwiper(callback) {
-                                            for (let i = 1; i <= each.more.image.count; i++) {
-                                                let $slide_clone = slide_copied.clone();
-
-                                                $slide_clone.attr('data-background', '/img/main/project_image/'+each.more.image.folder+'/'+i+'.jpg');
-                                                $slide_clone.appendTo($swiper.find('.swiper-wrapper'));
-
-                                            }
-                                            setTimeout(() => { //swiper 비동기 오류 개선
-                                                callback();
-                                            }, 100);
-                                        }
-
-                                        // swiper()
-                                        runSwiper(function() {
-                                            let swiper = new Swiper($swiper, {
-                                                lazy: true,
-                                                lazy: {
-                                                    loadPrevNext: false,
-                                                    loadOnTransitionStart: true
-                                                },
-                                                keyboard: {
-                                                    enabled: true,
-                                                },
-                                                navigation: {
-                                                    nextEl: $layer.find('.swiper-button-next'),
-                                                    prevEl: $layer.find('.swiper-button-prev')
-                                                },
-                                                pagination: {
-                                                    el: $layer.find('.swiper-pagination'),
-                                                    clickable: true
-                                                },
-                                            });
-                                            if (each.more.image.count <= 1) $layer.find('.swiper-button-next, .swiper-button-prev, .swiper-pagination').remove();
-                                        });
-                                    },
-                                });
-                            });
-                        }
-                        if (each.more.video) {
-                            let $btnVideo = $listMore.find('.btn_video').css('display', 'inline-flex');
-
-                            $btnVideo.attr({
-                                'data-title' : each.title,
-                                'data-src' : each.more.video.src,
-                                'data-type' : each.more.video.type,
-                            });
-
-                            $btnVideo.videoLayer();
-                        }
-                    }
-                    $item_clone.appendTo($list);
+                // $item_clone click()
+                $item_clone.on('click', function(e) {                    
+                    if ($(e.target).is('a, button') || $(e.target).hasClass('link_more')) return;
+                    
+                    $(this).toggleClass('item_project-active')
                 });
 
-                // lineClamp()
-                $list.find('.inner_default .desc span').lineClamp(2);
+                // .inner_default
+                $item_clone.find('.inner_default .box_thumb').css('background-image', 'url(/img/main/project_thumb/'+each.thumb+'), url(/img/main/project_thumb/onerror.png)');
+                $item_clone.find('.inner_default .tit').text(each.title);
+                $item_clone.find('.inner_default .desc').append('<span>'+each.description+'</span>');
 
-                // matchPath()
-                $list.find('[data-images-path]').matchPath();
-
-                // button hide()
-                if (idx >= list_divi.length - 1) $btnMore.hide();
-                else $btnMore.show();
-            }
-
-            // .btn_more click event
-            $btnMore.on('click', function() {
-                // 1. 선택된 태그의 keyword 저장
-                let tag = [];
-                let get_tag = $wrap.find('.list_tag .btn_tag.on').get();
-
-                get_tag.forEach(function(info){
-                    let text = $(info).find('span').text();
-                    text = text.replace(/\(/g,'&#40;').replace(/\)/g,'&#41;');
-                    tag.push(text);
-                });
-
-                // 2. 선택된 태그가 포함된 item
-                let activeList = []
-                let patt = new RegExp(tag.join('|'));
-
-                infoList.forEach(function(each, idx){
-                    let combineText = each.corp+','+each.workRole.join(',')+','+each.tag.join(',');
-                    combineText = combineText.replace(/\(/g,'&#40;').replace(/\)/g,'&#41;');
-
-                    if (patt.test(combineText)) activeList.push(each);
-                });
-
-                // 3.화면생성
-                appendList(activeList, ProjectPage)
-                ProjectPage++
-            });
-
-            // 처음 불러오기
-            let keyword = ['피플라이프', '취업뽀개기', '경향신문', '한국경제매거진', '전북은행'];
-
-            keyword.forEach(function(each, idx, arr){
-                let $this = $wrap.find('.list_tag :contains("'+each+'")').closest('.btn_tag');
-
-                $this.addClass('on');
-
-                if (idx === arr.length - 1) {
-                    $btnMore.trigger('click');
-                    $wrap.find('.list_tag').addClass('is-reset');
+                for (let i = 0; i < each.tag.length && i < 5; i++) {
+                    $item_clone.find('.inner_default .tag').append('<span>'+each.tag[i]+'</span>');
                 }
+
+                // .inner_overlay
+                $item_clone.find('.inner_overlay .tit').text(each.title);
+                $item_clone.find('.inner_overlay .desc').text(each.workDesc);
+                $item_clone.find('.inner_overlay .role').text(String(each.workRole).replace(/,/gi,', '));
+                $item_clone.find('.inner_overlay .work').text(each.workDate);
+                $item_clone.find('.inner_overlay .rate').text(each.workRate);
+
+                // .inner_overlay - .list_more
+                let $listMore = $item_clone.find('.inner_overlay .list_more');
+
+                if (each.more) {
+                    if (each.more.link) $listMore.find('.link_more').css('display', 'inline-flex').attr('href',each.more.link);
+                    if (each.more.image) {
+                        let $btnImg = $listMore.find('.btn_image').css('display', 'inline-flex');
+
+                        $btnImg.on('click', function() {
+                            LAYER({
+                                name : 'projectImage',
+                                afterLoad : function(){
+                                    let $layer = $('#projectImage_wrap');
+                                    let $swiper = $layer.find('.swiper-container');
+                                    let slide_copied = $swiper.find('.swiper-slide').detach();
+
+                                    // scroll 방지
+                                    $layer.on('scroll touchmove mousewheel', function(e){
+                                        e.preventDefault();
+                                        e.stopPropagation();
+                                        return false;
+                                    });
+
+                                    // slide_clone
+                                    function runSwiper(callback) {
+                                        for (let i = 1; i <= each.more.image.count; i++) {
+                                            let $slide_clone = slide_copied.clone();
+
+                                            $slide_clone.attr('data-background', '/img/main/project_image/'+each.more.image.folder+'/'+i+'.jpg');
+                                            $slide_clone.appendTo($swiper.find('.swiper-wrapper'));
+
+                                        }
+                                        setTimeout(() => { //swiper 비동기 오류 개선
+                                            callback();
+                                        }, 100);
+                                    }
+
+                                    // swiper()
+                                    runSwiper(function() {
+                                        let swiper = new Swiper($swiper, {
+                                            lazy: true,
+                                            lazy: {
+                                                loadPrevNext: false,
+                                                loadOnTransitionStart: true
+                                            },
+                                            keyboard: {
+                                                enabled: true,
+                                            },
+                                            navigation: {
+                                                nextEl: $layer.find('.swiper-button-next'),
+                                                prevEl: $layer.find('.swiper-button-prev')
+                                            },
+                                            pagination: {
+                                                el: $layer.find('.swiper-pagination'),
+                                                type: 'fraction'
+                                            },
+                                        });
+                                        if (each.more.image.count <= 1) $layer.find('.swiper-button-next, .swiper-button-prev, .swiper-pagination').remove();
+                                    });
+                                },
+                            });
+                        });
+                    }
+                    if (each.more.video) {
+                        let $btnVideo = $listMore.find('.btn_video').css('display', 'inline-flex');
+
+                        $btnVideo.attr({
+                            'data-title' : each.title,
+                            'data-src' : each.more.video.src,
+                            'data-type' : each.more.video.type,
+                        });
+
+                        $btnVideo.videoLayer();
+                    }
+                }
+                $item_clone.appendTo($list);
             });
-        })();
+
+            // lineClamp()
+            $list.find('.inner_default .desc span').lineClamp(2);
+
+            // matchPath()
+            $list.find('[data-images-path]').matchPath();
+
+            // button hide()
+            if (idx >= list_divi.length - 1) $btnMore.hide();
+            else $btnMore.show();
+        }
+
+        // .btn_more click event
+        $btnMore.on('click', function() {
+            // 1. 선택된 태그의 keyword 저장
+            let tag = [];
+            let get_tag = $wrap.find('.list_tag .btn_tag.on').get();
+
+            get_tag.forEach(function(info){
+                let text = $(info).find('span').text();
+                text = text.replace(/\(/g,'&#40;').replace(/\)/g,'&#41;');
+                tag.push(text);
+            });
+
+            // 2. 선택된 태그가 포함된 item
+            let activeList = []
+            let patt = new RegExp(tag.join('|'));
+
+            infoList.forEach(function(each, idx){
+                let combineText = each.corp+','+each.workRole.join(',')+','+each.tag.join(',');
+                combineText = combineText.replace(/\(/g,'&#40;').replace(/\)/g,'&#41;');
+
+                if (patt.test(combineText)) activeList.push(each);
+            });
+
+            // 3.화면생성
+            appendList(activeList, ProjectPage)
+            ProjectPage++
+        });
+
+        // 처음 불러오기
+        let keyword = ['피플라이프', '취업뽀개기', '경향신문', '한국경제매거진', '전북은행'];
+
+        keyword.forEach(function(each, idx, arr){
+            let $this = $wrap.find('.list_tag :contains("'+each+'")').closest('.btn_tag');
+
+            $this.addClass('on');
+
+            if (idx === arr.length - 1) {
+                $btnMore.trigger('click');
+                $wrap.find('.list_tag').addClass('is-reset');
+            }
+        });
     });
 
 
@@ -586,7 +582,7 @@ $(function(){/*
     let slide_copied = $swiper.find('.swiper-slide').detach();
 
     // clone()
-    getList('https://me2designer.com/js/json/license.json', function(infoList) {
+    getList(SERVER.public+'/json/license.json', function(infoList) {
         infoList.forEach(function(each) {
             let slide_clone = slide_copied.clone();
 
@@ -681,7 +677,7 @@ $(function(){/*
     let slideThumb_copied = $swiperThumb.find('.swiper-slide').detach();
 
     // clone()
-    getList('https://me2designer.com/js/json/activity.json', function(infoList) {
+    getList(SERVER.public+'/json/activity.json', function(infoList) {
         infoList.forEach(function(each) {
             let $slideTop_clone = slideTop_copied.clone();
             let $slideThumb_clone = slideThumb_copied.clone();
@@ -783,7 +779,7 @@ $(function(){/*
     let $swiper = $wrap.find('.swiper-container');
     let slide_copied = $swiper.find('.swiper-slide').detach();
 
-    getList('https://me2designer.com/js/json/career.json', function(infoList) {
+    getList(SERVER.public+'/json/career.json', function(infoList) {
         infoList.forEach(function(each) {
             let $slide_clone = slide_copied.clone();
             $slide_clone.find('.logo').attr({
@@ -813,10 +809,10 @@ $(function(){/*
         // swiper
         var swiper = new Swiper($swiper, {
             autoplay: {
-                delay: 3000,
+                delay: 4000,
                 disableOnInteraction : false,
             },
-            speed: 600,
+            speed: 1400,
             slidesPerView: 'auto',
             centeredSlides: true,
             loop: true,
@@ -939,9 +935,17 @@ $(function(){/*
                     window.open('about:blank').location.href=each.postUrl;
                 });
             } else {
-                $tr_clone.attr('data-disable','true');
+                $tr_clone.attr('data-disable','true').on('click', function() {
+                    LAYER({
+                        name : 'alert',
+                        text : '현재 열람이 불가합니다.'
+                    })
+                });
             }
         });
+
+        // 말줄임
+        $tbody.find('.tit').lineClamp(1);
 
         // clone() - 페이징
         let total = infoList.post.totalCount / infoList.post.count;

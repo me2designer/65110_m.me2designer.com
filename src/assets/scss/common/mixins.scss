@@ -4,22 +4,16 @@
 
 
 /****************************************************************************
-    IE 브라우저 hack
+    Breakpoints
 ****************************************************************************/
-
-
-
-/*
-    [style 작성 예]
-        .선택자 {
-            @include ieHack {
-                display:none;
-            }
-        }
-*/
-
-@mixin ieHack() {
-    @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+@mixin sm {
+    @media (max-width: #{$G-breakpoint-medium - 1px}) {
+        @content;
+    }
+}
+  
+@mixin md {
+    @media (min-width: #{$G-breakpoint-medium}) {
         @content;
     }
 }
@@ -29,9 +23,6 @@
 /****************************************************************************
     clearfix
 ****************************************************************************/
-
-
-
 @mixin clearfix {
     &::after {
         content:'';display:block;clear:both;
@@ -43,9 +34,6 @@
 /****************************************************************************
     TEXT 밑줄생성
 ****************************************************************************/
-
-
-
 /*
     [html 작성 예]
         <p class="선택자">
@@ -62,7 +50,7 @@
     $name: inline-#{unique-id()};
     display:inline-block;position:relative;z-index:1;line-height:1em;padding:0 0.2em;
     &::after {
-        content:"";position:absolute;z-index:-1;left:0;bottom:-20%;width:0%;height:#{$height}em;background-color:$bgColor;animation:$name 0.5s $delay forwards cubic-bezier(.73,.01,.48,1.12);
+        content:"";position:absolute;z-index:-1;left:0;bottom:-20%;width:0%;height:#{$height}em;white-space:nowrap;background-color:$bgColor;animation:$name 0.5s $delay forwards cubic-bezier(.73,.01,.48,1.12);
     }
     @keyframes #{$name} {
         100% {width:100%}
@@ -74,9 +62,6 @@
 /****************************************************************************
     slide Button
 ****************************************************************************/
-
-
-
 /*
     [html 작성 예]
         <button class="선택자" type="button">
@@ -90,7 +75,7 @@
         }
 */
 
-@mixin slideBtn($width:auto, $height:54px, $bdc:#000, $fz:18px) {
+@mixin slideBtn($width:auto, $height:6.5rem, $bdc:#000, $fz:18rem) {
     display:flex;justify-content:center;align-items:center;position:relative;z-index:1;width:#{$width};height:#{$height};border:1px solid #{$bdc};
     &::after {
         content:"";position:absolute;top:0;bottom:0;left:0;right:100%;z-index:-1;background-color:#{$bdc};transition:all 0.4s ease-in-out;
@@ -136,12 +121,10 @@
 }
 
 
+
 /****************************************************************************
     Gradient Slide Button
 ****************************************************************************/
-
-
-
 /*
     [html 작성 예]
         <button class="선택자" type="button">
@@ -155,15 +138,15 @@
         }
 */
 
-@mixin gradSlideBtn($width:auto, $height:64px, $pd:0 52px, $bdc:#b4b5b5, $bdr:2em, $fz:20px) {
-    overflow:hidden;display:inline-flex;justify-content:center;align-items:center;position:relative;z-index:1;width:#{$width};height:#{$height};margin:0 auto;padding:#{$pd};font-size:#{$fz};border:solid 1px #{$bdc};border-radius:#{$bdr};line-height:1em;transition:all 0.2s #{$G-easeHover};
+@mixin gradSlideBtn($width:auto, $height:6rem, $pd:0 4.8rem, $bdc:#b4b5b5, $bdr:5em, $fz:1.7rem) {
+    overflow:hidden;display:inline-flex;justify-content:center;align-items:center;position:relative;z-index:1;width:#{$width};height:#{$height};margin:0 auto;padding:#{$pd};font-size:#{$fz};border:solid 1px #{$bdc};border-radius:#{$bdr};line-height:1em;white-space:nowrap;transition:all 0.2s #{$G-easeHover};
     &::after {
         content:"";position:absolute;top:0;bottom:0;left:0;right:100%;z-index:-1;background:#{$G-gradPrimary};transition:all 0.4s #{$G-easeHover};
     }    
     svg {
         fill:#000;font-size:0.8em;transition:all 0.2s #{$G-easeHover};
     }    
-    &:hover, &.on {
+    &.on {
         color:#fff;border-color:transparent;transition:border-color 0.4s 0.2s #{$G-easeHover}, color 0.4s #{$G-easeHover};
         &::after {
             right:0;
@@ -179,9 +162,6 @@
 /****************************************************************************
     동영상 play - 아이콘
 ****************************************************************************/
-
-
-
 /*
     [html 작성 예]
         <i class="선택자"></i>
@@ -210,9 +190,6 @@
 /****************************************************************************
     동영상 play - button
 ****************************************************************************/
-
-
-
 /*
     [html 작성 예]
         <button class="선택자"></button>
@@ -270,5 +247,3 @@
         }
     }
 }
-
-

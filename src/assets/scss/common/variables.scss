@@ -29,3 +29,13 @@ $G-gradPrimary: linear-gradient(to right, #07d05a, #24beac);
 ****************************************************************************/
 $G-easeHover: cubic-bezier(0.215, 0.61, 0.355, 1);
 
+
+
+/****************************************************************************
+    Breakpoints                               https://getbootstrap.com 참고함
+****************************************************************************/
+$G-breakpoint-small: 576px;
+$G-breakpoint-medium: 768px;
+$G-breakpoint-large: 1024px;
+$G-breakpoint-extraLarge: 1680px;
+$G-breakpoint-extraExtraLarge: 1920px;

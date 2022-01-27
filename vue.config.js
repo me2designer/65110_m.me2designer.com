@@ -9,10 +9,10 @@ module.exports = {
                 args[0].title = "ME2DESIGNER 포트폴리오";
                 return args;
             })
-    },    
+    },
     devServer: {
-        overlay: false,        
-	},    
+        overlay: false        
+	},
     css: {
         loaderOptions: {
             sass: {

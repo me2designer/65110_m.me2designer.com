@@ -1,0 +1,31 @@
+@charset "UTF-8";
+/* CSS Document */
+
+
+
+/*
+■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+*/
+
+
+
+/* 동영상 자동 재생 */
+#projectImage_wrap {background-color: rgba(0,0,0,0.9)}
+#projectImage_wrap .layer {width:100%;height:100%}
+#projectImage_wrap > .close {top:2.2rem;right:2.2rem;z-index:110;margin:0;font-size:4.5rem}
+#projectImage_wrap > .close svg {border-radius:100%;background-color:#5e5e5e;box-shadow:0.3rem 0.3rem 1rem rgba(0,0,0,0.2);}
+#projectImage_wrap > .close svg path {stroke:#fff;transform:scale(0.4);transform-origin:50% 50%}
+#projectImage {position:relative;width:100%;height:100%}
+#projectImage .swiper-container {width:100%;height:100%}
+#projectImage .swiper-slide {background-size:contain}
+#projectImage .swiper-button-white {width:4rem;height:6.5rem;background-color:rgba(0,0,0,0.2);background-size:50%;}
+#projectImage .swiper-button-prev {left:0}
+#projectImage .swiper-button-next {right:0}
+#projectImage .swiper-pagination {bottom:3rem;left:50%;width:8rem;padding:0.5em 0;border-radius:2em;font-family:"OpenSans";font-size:1.6rem;color:#fff;line-height:1em;background-color:rgba(0,0,0,0.2);transform:translateX(-50%)}
+#projectImage .swiper-pagination-current {font-weight:bold}
+
+
+
+/*
+■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+*/

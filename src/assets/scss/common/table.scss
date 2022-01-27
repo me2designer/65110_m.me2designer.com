@@ -10,7 +10,7 @@
     tbody {
         tr {
             td {
-                padding:1.94em 1.33em;border-top:1px solid #eee;font-size:18px;text-align:center;word-break:keep-all;
+                padding:1.94em 0;border-top:1px solid #eee;font-size:1.3rem;text-align:center;word-break:keep-all;
                 &:nth-child(1) {
                     border-left:none;
                 }
@@ -21,6 +21,12 @@
                 }
             }
         }
+    }
+}
+
+@include md {
+    .table tbody td {        
+        padding:1.94em 1.33em !important;
     }
 }
 
@@ -72,44 +78,14 @@
 
 
 /****************************************************************************
-    table-hover
-****************************************************************************/
-.table-hover {
-    tbody {
-        tr {
-            transition:all 0.3s $G-easeHover;
-            &:hover {
-                background-color:#fafbfb;
-            }
-        }
-    }
-}
-
-.table-hover-anchor {
-    tbody {
-        tr {
-            transition:all 0.3s $G-easeHover;cursor:pointer;
-            &:hover {
-                background-color:#fafbfb;
-            }
-        }        
-    }
-}
-
-
-
-/****************************************************************************
     table-pagination
 ****************************************************************************/
 .table-pagination {
-    width:100%;padding-top:45px;text-align:center;
+    width:100%;padding:4rem 0 4.8rem;text-align:center;
     .table-pagination-prev {
         display:inline-flex;justify-content:center;align-items:center;width:32px;height:32px;margin-right:10px;border:1px solid #a1a1a1;border-radius:100%;font-size:12px;fill:#a1a1a1;transition:all 0.3s #{$G-easeHover};cursor:pointer;
         &.disable {
             opacity:0.5;
-        }
-        &:hover:not(.disable) {
-            border:0;fill:#fff;background:#{$G-gradPrimary};            
         }
     }
     .table-pagination-next {
@@ -117,15 +93,9 @@
         &.disable {
             opacity:0.5;
         }
-        &:hover:not(.disable) {
-            border:0;fill:#fff;background:#{$G-gradPrimary};            
-        }
     }
     .table-pagination-bullet {
-        display:inline-block;position:relative;margin:0 14px;font-size:18px;font-weight:bold;color:#767676;cursor:pointer;
-        &:hover {
-            color:#{$G-colorPrimary};
-        }
+        display:inline-block;position:relative;margin:0 0.7em;font-size:1.8rem;font-weight:bold;color:#767676;cursor:pointer;
     }
     .table-pagination-bullet.on {
         color:#{$G-colorPrimary};

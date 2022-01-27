@@ -10,6 +10,11 @@
 /****************************************************************************
     utilities Class                        https://getbootstrap.com 참고함
 ****************************************************************************/
+/* is Breakpoints */ 
+@include md {
+    .hidden-tablet {display:none !important}
+}
+
 /* color */
 .color {
     $value: #767676;
@@ -22,39 +27,3 @@
 }
 .color-primary {color:$G-colorPrimary !important}
 .color-secondary {color:$G-colorSecondary !important}
-
-
-
-/****************************************************************************
-    animate cursor
-****************************************************************************/
-.animateCursor {    
-    position:absolute;top:0;bottom:0;left:0;right:0;z-index:10000;opacity:0;transition:opacity 0.1s ease-in-out;user-select:none;pointer-events:none;
-    .circle {
-        $name: inline-#{unique-id()};
-        position:absolute;top:50%;left:50%;width:72px;height:72px;border-radius:100%;border:2px solid #06080a;transform:scale(1) translate(-50%, -50%);transform-origin:left top;animation:$name 1s infinite alternate ease-in-out;
-        @keyframes #{$name} {
-            100%            {transform:scale(0.6) translate(-50%, -50%)}
-        }
-    }
-    .arrow {
-        position:absolute;top:50%;left:50%;width:72px;height:72px;transform:translate(-50%, -50%);
-        &::before {
-            $name: inline-#{unique-id()};
-            content:"";position:absolute;top:50%;right:15px;margin-top:-3px;width:0px;height:0px;border-top:3px solid transparent;border-bottom:3px solid transparent;border-left: 6px solid #06080a;animation:$name 1s infinite alternate ease-in-out;
-            @keyframes #{$name} {
-                100%            {right:0;}
-            }
-        }
-        &::after {
-            $name: inline-#{unique-id()};
-            content:"";position:absolute;top:50%;left:15px;margin-top:-3px;width:0px;height:0px;border-top:3px solid transparent;border-bottom:3px solid transparent;border-right: 6px solid #06080a;;animation:$name 1s infinite alternate ease-in-out;
-            @keyframes #{$name} {
-                100%            {left:0;}
-            }
-        }
-    }
-    &.is-active {
-        opacity:1;
-    }
-}

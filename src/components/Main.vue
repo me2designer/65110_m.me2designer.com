@@ -4,28 +4,28 @@
     <!-- 메인비주얼 -->
     <section id="visual">
         <div class="inner pointer-none">
-            <h3 class="tit_section">안녕하세요,<br><strong>UI 마크업 개발자 장지훈</strong> 입니다.</h3>
+            <h3 class="tit_section">안녕하세요,<br><strong>UI 마크업 개발자</strong> <br class="hidden-tablet"><strong>장지훈</strong> 입니다.</h3>
             <button class="videoLayer on pointer-all" data-src="https://www.youtube.com/embed/fTBvYQUEbFQ" data-title="안녕하세요, UI 마크업 개발자 장지훈 입니다(샘플영상 ▼) " data-type="youtube" type="button" title="영상재생">1분 자기소개 영상</button>
         </div>
         <div class="swiper-container">
             <div class="swiper-wrapper">
                 <div class="swiper-slide">
                     <div class="inner">
-                        <p class="tit">웹 표준과 웹 접근성 그리고 크로스 브라우징,<br>다양한 디바이스에 최적화된 UI 마크업 개발하고 있습니다.</p>
+                        <p class="tit">웹표준, 접근성, 크로스 브라우징까지<br>다양한 디바이스에 최적화된<br class="hidden-tablet">UI 마크업 개발하고 있습니다.</p>
                     </div>
                     <div class="bg swiper-lazy" :data-background="imgPath+'visual_bg1.jpg'" :style="'background-image:url('+imgPath+'visual_bg_onerror.png)'"></div>
                     <div class="swiper-lazy-preloader"></div>
                 </div>
                 <div class="swiper-slide">
                     <div class="inner">
-                        <p class="tit">더 좋은 코드를 만들기 위해 고민하고 습관을 정리하여<br>가장 효율적인 방법으로 생산성 향상에 노력합니다.</p>
+                        <p class="tit">더 좋은 코드를 만들기 위해 고민하고<br>습관을 정리하여 가장 효율적인 방법으로<br class="hidden-tablet">생산성 향상에 노력합니다.</p>
                     </div>
                     <div class="bg swiper-lazy" :data-background="imgPath+'visual_bg2.jpg'" :style="'background-image:url('+imgPath+'visual_bg_onerror.png)'"></div>
                     <div class="swiper-lazy-preloader"></div>
                 </div>
                 <div class="swiper-slide">
                     <div class="inner">
-                        <p class="tit">광고디자인, UX/UI 디자인, 마크업 개발까지 다양한 기술과 경험으로<br>의사소통과 협업에 큰 강점을 갖고 있습니다.</p>
+                        <p class="tit">광고디자인, UX/UI 디자인, 마크업 개발까지<br>다양한 기술과 경험으로 의사소통과<br class="hidden-tablet">협업에 큰 강점을 갖고 있습니다.</p>
                     </div>
                     <div class="bg swiper-lazy" :data-background="imgPath+'visual_bg3.jpg'" :style="'background-image:url('+imgPath+'visual_bg_onerror.png)'"></div>
                     <div class="swiper-lazy-preloader"></div>
@@ -39,7 +39,7 @@
                 </div>
                 <div class="swiper-slide">
                     <div class="inner">
-                        <p class="tit">마크업과 스타일링 위한 코딩에서 벗어나<br>꾸준한 역량 개발로 FE 개발자로 성장하고 있습니다.</p>
+                        <p class="tit">마크업과 스타일링 위한 코딩에서 벗어나<br>꾸준한 역량 개발을 통해 FE 개발자로<br class="hidden-tablet">성장하고 있습니다.</p>
                     </div>
                     <div class="bg swiper-lazy" :data-background="imgPath+'visual_bg5.jpg'" :style="'background-image:url('+imgPath+'visual_bg_onerror.png)'"></div>
                     <div class="swiper-lazy-preloader"></div>
@@ -64,27 +64,27 @@
                 <div class="swiper-slide">
                     <p class="tit">열아홉, 고등학교 재학중 진로 결정</p>
                     <p class="num"><span class="count">2001</span>.<span class="count">02</span>.<span class="count">13</span></p>
-                    <p class="desc"><mark>그래픽디자인에 대한 흥미를 시작으로 관련 자격증을 취득하고</mark><br><mark>홈페이지 제작 경진대회에서 3회이상 수상을 함으로써 재능이 더해져 진로를 결정</mark></p>
+                    <p class="desc"><mark>그래픽디자인 취미활동 중 재능을 발견하고</mark><br><mark>자격증 취득과 홈페이지 제작 경진대회 3회이상</mark><br><mark>수상 함으로써 진로를 결정</mark></p>
                 </div>
                 <div class="swiper-slide">
                     <p class="tit">스물둘, 첫 사회생활 도전기!<p>
                     <p class="num"><span class="count">2004</span>.<span class="count">05</span>.<span class="count">01</span></p>
-                    <p class="desc"><mark>휴학 중 약 10개월 동안 엔프리즘(주)에서 인턴으로</mark><br><mark>"Hello Myworrdy" 교제 중 Flash Animation 제작과 제품 출시에 기여</mark></p>
+                    <p class="desc"><mark>휴학 중 약 10개월 동안 엔프리즘(주)에서</mark><br><mark>인턴으로 "Hello Myworrdy" 교제 중 Flash Animation</mark><br><mark>제작과 제품 출시에 기여</mark></p>
                 </div>
                 <div class="swiper-slide">
                     <p class="tit">스물다섯, 군 복무 중에도 역량 발휘</p>
                     <p class="num"><span class="count">2007</span>.<span class="count">06</span>.<span class="count">30</span></p>
-                    <p class="desc"><mark>입대 후 OA능력을 인정받아 군사행정특기병(3111)으로 훈련받았으며,</mark><br><mark>육군본부 부관감실 "장교/부사관 상훈정보조회시스템" 개발(기획/디자인)로 표창 수여</mark></p>
+                    <p class="desc"><mark>입대 후 OA능력을 인정받아</mark><br><mark>군사행정특기병(3111)으로 훈련받았으며,</mark><br><mark>육군본부 부관감실 "장교/부사관 상훈정보조회시스템"</mark><br><mark>개발(기획/디자인)로 표창 수여</mark></p>
                 </div>
                 <div class="swiper-slide">
                     <p class="tit">스물여덟, 대학교 졸업과 첫 직장생활 시작</p>
                     <p class="num"><span class="count">2010</span>.<span class="count">02</span>.<span class="count">08</span></p>
-                    <p class="desc"><mark>커뮤니케이션 디자인 전공으로 Flash Animation 사용한 졸업작품을 바탕으로</mark><br><mark>종합유통기업 (주)한국리모텍에서 광고디자이너로 첫 직장생활을 시작</mark></p>
+                    <p class="desc"><mark>커뮤니케이션 디자인 전공으로 Flash Animation</mark><br><mark>졸업작품을 바탕으로 종합유통기업 (주)한국리모텍에서</mark><br><mark> 광고디자이너로 첫 직장생활을 시작</mark></p>
                 </div>
                 <div class="swiper-slide">
                     <p class="tit">현재, FE개발자로 나아가고 있는 Generalist</p>
                     <p class="num">VISION <span class="count">2022</span></p>
-                    <p class="desc"><mark>11년 7개월 동안 광고디자인, UX/UI 디자인, 웹퍼블리싱 경력에서</mark><br><mark>더 나아가 데이터 중심 애플리케이션 개발을 위한 프론트웹개발자로 성장</mark></p>
+                    <p class="desc"><mark>11년 7개월 동안 광고디자인, UX/UI 디자인,</mark><br><mark>웹퍼블리싱 경력에서 더 나아가 데이터 중심 애플리케이션</mark><br><mark>개발을 위한 프론트웹개발자로 성장</mark></p>
                 </div>
             </div>
         </div>
@@ -92,7 +92,7 @@
         <div class="swiper-button-prev swiper-button-white" slot="button-prev"></div>
         <div class="swiper-button-next swiper-button-white" slot="button-next"></div>
         <!-- Add Pagination -->
-        <div class="swiper-pagination"></div>        
+        <div class="swiper-pagination"></div>
     </section>
     <!-- //성장과정 -->
 
@@ -106,9 +106,7 @@
             <ul class="list_project">
                 <li class="item_project">
                     <div class="inner_default">
-                        <div class="box_thumb">
-                            <img src="" alt="" onerror="this.src='/img/main/project_thumb/onerror.png'">
-                        </div>
+                        <div class="box_thumb"></div>
                         <p class="tit"></p>
                         <p class="desc"></p>
                         <p class="tag"></p>
@@ -128,7 +126,7 @@
                 </li>
             </ul>
             <div class="btn_area">
-                <button class="btn_more" type="button"><img class="ico mr-5" src="" data-images-path="/images/ico/arr_bottom01.svg"><span>더보기</span></button>
+                <button class="btn_more" type="button"><img class="ico" src="" data-images-path="/images/ico/arr_bottom01.svg"><span></span></button>
             </div>
         </div>
     </section>
@@ -198,7 +196,7 @@
                                     <p class="desc"></p>
                                 </div>
                                 <i class="border"></i>
-                            </div>                            
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -225,7 +223,7 @@
                         </div>
                         <div class="swiper-container swiper-thumb">
                             <div class="swiper-wrapper">
-                                <div class="swiper-slide swiper-lazy" data-background=""><div class="swiper-lazy-preloader"></div></div>                                                                                              
+                                <div class="swiper-slide swiper-lazy" data-background=""><div class="swiper-lazy-preloader"></div></div>
                             </div>
                         </div>
                     </div>
@@ -264,8 +262,12 @@
                         </div>
                     </div>
                 </div>
-            </div>            
-        </div>        
+            </div>
+        </div>
+        <!-- Add Navigation -->
+        <div class="swiper-button-prev swiper-button-white" slot="button-prev"></div>
+        <div class="swiper-button-next swiper-button-white" slot="button-next"></div>
+        <!-- Add Pagination -->
         <div class="swiper-pagination"></div>
     </section>
     <!-- //근무이력 -->
@@ -273,19 +275,14 @@
     <!-- 코딩블로그 -->
     <section id="blog">
         <div class="inner">
-            <h3 class="tit_section">공부와 정보 공유 목적의 코딩블로그</h3>
-            <p class="desc_section">더 좋은 엔지니어가 되기 위해 웹스크랩핑 정보를 체계적으로 정리하여 새로운 기술 습득력을 향상하고 있습니다.<br>일관된 스타일의 결과물, 단순하고 재사용 용의하도록 코드리뷰를 진행하고있습니다.</p>
+            <h3 class="tit_section">코딩블로그 운영</h3>
+            <p class="desc_section">일관된 스타일의 결과물, 단순하고 재사용 용의하도록 코드리뷰를 진행하고있습니다.</p>
             <table class="table table-hover-anchor">
-                <colgroup>
-                    <col style="width:220px;">
-                    <col style="width:*;">
-                    <col style="width:200px;">
-                </colgroup>
                 <tbody>
                     <tr>
-                        <td class="cate text-left color-767676">카테고리</td>
-                        <td class="tit text-left">제목</td>
-                        <td class="date text-center color-767676">날짜</td>
+                        <td class="cate color-767676">카테고리</td>
+                        <td class="tit">제목</td>
+                        <td class="date color-767676">날짜</td>
                     </tr>
                 </tbody>
             </table>
@@ -315,7 +312,16 @@ export default {
         return {
             imgPath: '/img/main/'
         }
-    }
+    },
+    mounted() {
+        console.log();
+        var body = document.getElementsByTagName("body")[0];
+        window.onresize = function(){
+            var innerWidth = window.innerWidth;
+            innerWidth <= "1280" ? body.style.borderColor = "blue" : body.style.borderColor = "black";
+        }
+	},
+
 }
 </script>
 
