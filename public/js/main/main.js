@@ -4,7 +4,7 @@ var ProjectPage = 0;
 $(function(){/*
 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 */(function(){
-    
+
 
     /* 사이트 준비중 안내 */
     if(isReal) LAYER('developing');
@@ -206,14 +206,16 @@ $(function(){/*
                 let $item_clone = item_copied.clone();
 
                 // $item_clone click()
-                $item_clone.on('click', function(e) {                    
+                $item_clone.on('click', function(e) {
                     if ($(e.target).is('a, button') || $(e.target).hasClass('link_more')) return;
-                    
+
                     $(this).toggleClass('item_project-active')
                 });
 
                 // .inner_default
-                $item_clone.find('.inner_default .box_thumb').css('background-image', 'url(/img/main/project_thumb/'+each.thumb+'), url(/img/main/project_thumb/onerror.png)');
+                $item_clone.find('.inner_default .box_thumb').css({
+                    'background-image' : 'url('+SERVER.images+'/portfolio/project_thumb/'+each.thumb+'), url('+SERVER.images+'/portfolio/project_thumb/onerror.png)'
+                });
                 $item_clone.find('.inner_default .tit').text(each.title);
                 $item_clone.find('.inner_default .desc').append('<span>'+each.description+'</span>');
 
@@ -256,7 +258,7 @@ $(function(){/*
                                         for (let i = 1; i <= each.more.image.count; i++) {
                                             let $slide_clone = slide_copied.clone();
 
-                                            $slide_clone.attr('data-background', '/img/main/project_image/'+each.more.image.folder+'/'+i+'.jpg');
+                                            $slide_clone.attr('data-background', ''+SERVER.images+'/portfolio/project_image/'+each.more.image.folder+'/'+i+'.jpg');
                                             $slide_clone.appendTo($swiper.find('.swiper-wrapper'));
 
                                         }
@@ -390,12 +392,41 @@ $(function(){/*
         var slide_copied = $swiper_clone.find('.swiper-slide').detach();
         listThumb.forEach(function(fileName){
             var $slide_clone = slide_copied.clone()
-            $slide_clone.find('.slide-inner').attr('data-background', '/img/main/device_thumb/'+type+'/'+fileName+'.jpg');
+            $slide_clone.find('.slide-inner').attr('data-background', ''+SERVER.images+'/portfolio/device_thumb/'+type+'/'+fileName+'.jpg');
             $slide_clone.prependTo($swiper_clone.find('.swiper-wrapper'));
         });
         $swiper_clone.prependTo($wrap.find('.inner'));
     });
 
+
+    // IOS 배경이미지 위치고정
+    if (DEVICE.detail == "ios") {
+        scrollAction({
+            target: $wrap,
+            top: 100,
+            scrollDownAction : function(){
+                // 스크롤 DOWN 액션
+                $wrap.find('.bg').removeClass('d-none');
+            },
+            scrollUpAction : function(){
+                // 스크롤 DOWN 액션
+                $wrap.find('.bg').addClass('d-none');
+            },
+        });
+
+        scrollAction({
+            target: $('#professional'),
+            top: 0,
+            scrollDownAction : function(){
+                // 스크롤 DOWN 액션
+                $wrap.find('.bg').addClass('d-none');
+            },
+            scrollUpAction : function(){
+                // 스크롤 DOWN 액션
+                $wrap.find('.bg').removeClass('d-none');
+            },
+        });
+    }
 
 
 })();/*
@@ -548,24 +579,29 @@ $(function(){/*
 
 
     /* 경력개발 - 기술역량 */
-    var $wrap = $('#professional .tab-slide-tool')
+    let $wrap = $('#professional .tab-slide-tool')
+    let $swiper = $wrap.find('.swiper-container');
+    let swiper = new Swiper($swiper, {
+        autoplay: {
+            delay: 2000,
+            disableOnInteraction : false,
+        },
+        speed: 600,
+        slidesPerView: 'auto',
+        centeredSlides: true,
+        loop: true,
+        loopedSlides: $swiper.find('.swiper-slide').length,
+        navigation: {
+            nextEl: $wrap.find('.swiper-button-next'),
+            prevEl: $wrap.find('.swiper-button-prev')
+        },
+        pagination: {
+            el: $wrap.find('.swiper-pagination'),
+            clickable: true
+        },
+    });
 
-    //line animate
-    var $make = $wrap.find('#theMask')
-    var $loop = $wrap.find('#maskReveal')
-    var $lineList = [];
 
-    for (var i = 1; i < $make.find('line').length + 1; i++) {
-        $lineList.push($make.find('.line'+i+''));
-    }
-
-    var tl = new TimelineMax();
-    TweenMax.set($make.find('path, line'), {strokeDasharray:400, strokeDashoffset:400});
-
-    tl.addLabel("span", 0)
-        .to($lineList, 0.5, {ease:Power0.easeNone, strokeDashoffset:0}, "span")
-        .to($loop.find('path, line'), 10, {ease:Power0.easeNone, strokeDashoffset:-400, repeat:-1}, "loop");
-    tl.restart();
 
 
 
@@ -688,7 +724,7 @@ $(function(){/*
             });
             $slideTop_clone.find('.date').text(each.date);
             $slideTop_clone.find('.desc').text(each.description);
-            $slideThumb_clone.attr('data-background', '/img/main/professional_activity/'+each.thumb+'');
+            $slideThumb_clone.attr('data-background', SERVER.images+'/portfolio/professional_activity/'+each.thumb);
 
             $slideTop_clone.appendTo($swiperTop.find('.swiper-wrapper'))
             $slideThumb_clone.appendTo($swiperThumb.find('.swiper-wrapper'))
@@ -783,7 +819,7 @@ $(function(){/*
         infoList.forEach(function(each) {
             let $slide_clone = slide_copied.clone();
             $slide_clone.find('.logo').attr({
-                'src': '/img/main/career_ci/'+each.logo+cache+'',
+                'src': SERVER.images+'/portfolio/career_ci/'+each.logo+cache+'',
                 'alt': each.name
             });
             $slide_clone.find('.detail .name, .btn_area .corp').text(each.name);
@@ -807,20 +843,41 @@ $(function(){/*
     // afterLoad()
     const afterLoad = function() {
         // swiper
-        var swiper = new Swiper($swiper, {
-            autoplay: {
-                delay: 4000,
-                disableOnInteraction : false,
-            },
+        let swiper = new Swiper($swiper, {
+            // autoplay: {
+            //     delay: 6000,
+            //     disableOnInteraction : false,
+            // },
             speed: 1400,
             slidesPerView: 'auto',
+            slideToClickedSlide: true,
             centeredSlides: true,
             loop: true,
             loopedSlides: $swiper.find('.swiper-slide').length,
+            navigation: {
+                nextEl: $wrap.find('.swiper-button-next'),
+                prevEl: $wrap.find('.swiper-button-prev')
+            },
             pagination: {
                 el: $wrap.find('.swiper-pagination'),
                 clickable: true
             },
+            on: {
+                init: function() {
+                    $(this.el).find('.swiper-slide').on('click', function() {
+                        $(this).toggleClass('swiper-slide-touch-active');
+
+                        if (!$(this).hasClass('swiper-slide-touch-active')) {
+                            $(this).find('.btn_area').attr('style', 'animation-delay:0s');
+                        }
+                    });
+                },
+                slideChangeTransitionEnd: function() {
+                    let $this = $(this.el).find('[data-swiper-slide-index="'+this.realIndex+'"]');
+
+                    $this.siblings().removeClass('swiper-slide-touch-active').find('.btn_area').removeAttr('style');                    
+                },
+            }
         });
 
 

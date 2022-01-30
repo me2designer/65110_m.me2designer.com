@@ -14,15 +14,15 @@
     <meta property="og:type" content="website"> <!-- 페이지 타입 -->
     <meta property="og:title" content="ME2DESIGNER 포트폴리오">
     <meta property="og:description" content="UI 마크업 개발자 장지훈의 포트폴리오 소개합니다.">
-    <meta property="og:image" content="https://www.me2designer.com/img/myimage.jpg"> <!-- 콘텐츠를 공유 시 표시되는 이미지의 URL 800x400 -->
-    <meta property="og:url" content="https://www.me2designer.com"> <!-- 페이지의 표준 URL (데스크탑 URL) -->
+    <meta property="og:image" content="https://images.me2designer.com/portfolio/myimage.jpg"> <!-- 콘텐츠를 공유 시 표시되는 이미지의 URL 800x400 -->
+    <meta property="og:url" content="https://m.me2designer.com"> <!-- 페이지의 표준 URL (데스크탑 URL) -->
 
     <!-- FAVICON -->
-    <link rel="icon" href="https://www.me2designer.com/img/favicon/favicon-16.png" sizes="16x16">
-    <link rel="icon" href="https://www.me2designer.com/img/favicon/favicon-32.png" sizes="32x32">
-    <link rel="icon" href="https://www.me2designer.com/img/favicon/favicon-48.png" sizes="48x48">
-    <link rel="icon" href="https://www.me2designer.com/img/favicon/favicon-64.png" sizes="64x64">
-    <link rel="icon" href="https://www.me2designer.com/img/favicon/favicon-128.png" sizes="128x128">
+    <link rel="icon" href="https://images.me2designer.com/portfolio/favicon/favicon-16.png" sizes="16x16">
+    <link rel="icon" href="https://images.me2designer.com/portfolio/favicon/favicon-32.png" sizes="32x32">
+    <link rel="icon" href="https://images.me2designer.com/portfolio/favicon/favicon-48.png" sizes="48x48">
+    <link rel="icon" href="https://images.me2designer.com/portfolio/favicon/favicon-64.png" sizes="64x64">
+    <link rel="icon" href="https://images.me2designer.com/portfolio/favicon/favicon-128.png" sizes="128x128">
 
     <!-- FILES -->    
     <script src="//public.me2designer.com/js/server.js"></script>
@@ -42,10 +42,10 @@
             </div>
     
             <style type="text/css">
-                #lodingWrap {position:fixed;z-index:101;top:0;left:0;width:100%;height:100%;color:#fff;font-family:sans-serif;font-size:4.5vw;text-align:center;letter-spacing:-0.05em;white-space:nowrap;background-color:rgba(0,0,0,0.5)}
-                #lodingWrap .content {position:absolute;top:50%;left:50%;transform:translate(-50%, -50%)}
-                #lodingWrap .content .img {position:relative;margin:auto;width:30vw;height:30vw;transform:rotate(0);animation:loading 2.4s infinite linear;}
-                #lodingWrap .content .img i {position:absolute;top:0;left:50%;width:6vw;height:50%;margin-left:-3vw;transform-origin: 50% 100%;}
+                #lodingWrap {position:fixed;z-index:101;top:0;left:0;width:100%;height:100%;color:#fff;font-family:sans-serif;background-color:rgba(0,0,0,0.5)}
+                #lodingWrap .content {position:absolute;top:50%;left:50%;transform:translate(-50%, -50%);}
+                #lodingWrap .content .img {position:relative;margin:auto;width:20vw;height:20vw;transform:rotate(0);animation:lodingWrap 2.4s infinite linear;}
+                #lodingWrap .content .img i {position:absolute;top:0;left:50%;width:50%;height:50%;margin-left:-25%;transform-origin:50% 100%;}
                 #lodingWrap .content .img i:nth-child(1) {transform: rotate(45deg);}
                 #lodingWrap .content .img i:nth-child(2) {transform: rotate(90deg);}
                 #lodingWrap .content .img i:nth-child(3) {transform: rotate(135deg);}
@@ -54,17 +54,14 @@
                 #lodingWrap .content .img i:nth-child(6) {transform: rotate(270deg);}
                 #lodingWrap .content .img i:nth-child(7) {transform: rotate(315deg);}
                 #lodingWrap .content .img i:nth-child(8) {transform: rotate(360deg);}
-                #lodingWrap .content .img i::after {content:"";display:block;width:6vw;height:6vw;background-color:#fff;border-radius:50%;transform:scale(0.6)}
-    
-                @media screen and (min-width:1024px) {
-                    #lodingWrap {font-size:18px}
-                    #lodingWrap .content .img {width:150px;height:150px}
-                    #lodingWrap .content .img i {width:20px;margin-left:-10px}
-                    #lodingWrap .content .img i::after {width:20px;height:20px}
-                    #lodingWrap .content p {margin-top:15px}
+                #lodingWrap .content .img i::after {content:"";display:block;width:35%;height:35%;background-color:#fff;border-radius:50%;transform:scale(0.6)}
+                #lodingWrap .content p {position:absolute;left:50%;font-size:16px;white-space:nowrap;transform:translate(-50%, 80%)}
+
+                @media screen and (min-width:768px) {
+                    #lodingWrap .content .img {width:100px;height:100px;}                    
                 }
-    
-                @keyframes loading {
+
+                @keyframes lodingWrap {
                     0% {transform: rotate(0);}
                     100% {transform: rotate(360deg);}
                 }

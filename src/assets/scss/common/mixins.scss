@@ -18,6 +18,39 @@
     }
 }
 
+@mixin lg {
+    @media (min-width: #{$G-breakpoint-large}) {
+        @content;
+    }
+}
+
+
+/****************************************************************************
+    브라우저 hack
+****************************************************************************/
+/*
+    [style 작성 예]
+        .선택자명 {
+            @include 지시자명 {
+                display:none;
+            }
+        }
+*/
+
+@mixin ieHack() {
+    @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+        @content;
+    }
+}
+
+@mixin safariHack() {
+    @media not all and (min-resolution:.001dpcm) { 
+        @supports (-webkit-appearance:none) {
+            @content;
+        }
+   }
+}
+
 
 
 /****************************************************************************
@@ -138,21 +171,21 @@
         }
 */
 
-@mixin gradSlideBtn($width:auto, $height:6rem, $pd:0 4.8rem, $bdc:#b4b5b5, $bdr:5em, $fz:1.7rem) {
-    overflow:hidden;display:inline-flex;justify-content:center;align-items:center;position:relative;z-index:1;width:#{$width};height:#{$height};margin:0 auto;padding:#{$pd};font-size:#{$fz};border:solid 1px #{$bdc};border-radius:#{$bdr};line-height:1em;white-space:nowrap;transition:all 0.2s #{$G-easeHover};
+@mixin gradSlideBtn($width:auto, $height:6rem, $mg:0 auto, $pd:0 4.8rem, $bdc:#b4b5b5, $bdr:5em, $fz:1.7rem) {
+    overflow:hidden;display:inline-flex;justify-content:center;align-items:center;position:relative;z-index:1;width:#{$width};height:#{$height};margin:#{$mg};padding:#{$pd};font-size:#{$fz};border:solid 1px #{$bdc};border-radius:#{$bdr};line-height:1em;white-space:nowrap;
     &::after {
-        content:"";position:absolute;top:0;bottom:0;left:0;right:100%;z-index:-1;background:#{$G-gradPrimary};transition:all 0.4s #{$G-easeHover};
+        content:"";position:absolute;top:0;bottom:0;left:0;right:100%;z-index:-1;background:#{$G-gradPrimary};
     }    
     svg {
-        fill:#000;font-size:0.8em;transition:all 0.2s #{$G-easeHover};
+        fill:#000;font-size:0.8em;
     }    
-    &.on {
-        color:#fff;border-color:transparent;transition:border-color 0.4s 0.2s #{$G-easeHover}, color 0.4s #{$G-easeHover};
+    &.on, &.is-touch {
+        color:#fff;border-color:transparent;
         &::after {
             right:0;
         }        
         svg {
-            fill:#fff;transition:all 0.4s #{$G-easeHover};
+            fill:#fff;
         }
     }
 }

@@ -4,44 +4,44 @@
     <!-- 메인비주얼 -->
     <section id="visual">
         <div class="inner pointer-none">
-            <h3 class="tit_section">안녕하세요,<br><strong>UI 마크업 개발자</strong> <br class="hidden-tablet"><strong>장지훈</strong> 입니다.</h3>
+            <h3 class="tit_section">안녕하세요,<br><strong>UI 마크업 개발자</strong> <br class="d-md-none"><strong>장지훈</strong> 입니다.</h3>
             <button class="videoLayer on pointer-all" data-src="https://www.youtube.com/embed/fTBvYQUEbFQ" data-title="안녕하세요, UI 마크업 개발자 장지훈 입니다(샘플영상 ▼) " data-type="youtube" type="button" title="영상재생">1분 자기소개 영상</button>
         </div>
         <div class="swiper-container">
             <div class="swiper-wrapper">
                 <div class="swiper-slide">
                     <div class="inner">
-                        <p class="tit">웹표준, 접근성, 크로스 브라우징까지<br>다양한 디바이스에 최적화된<br class="hidden-tablet">UI 마크업 개발하고 있습니다.</p>
+                        <p class="tit">웹표준, 접근성, 크로스 브라우징까지<br>다양한 디바이스 조건에 최적화된 <br class="d-md-none">UI 마크업 개발하고 있습니다.</p>
                     </div>
-                    <div class="bg swiper-lazy" :data-background="imgPath+'visual_bg1.jpg'" :style="'background-image:url('+imgPath+'visual_bg_onerror.png)'"></div>
+                    <div class="bg swiper-lazy" :data-background="imgPath+'visual_bg1_pc.jpg'" :style="'background-image:url('+imgPath+'visual_bg_onerror_pc.png)'"></div>
                     <div class="swiper-lazy-preloader"></div>
                 </div>
                 <div class="swiper-slide">
                     <div class="inner">
-                        <p class="tit">더 좋은 코드를 만들기 위해 고민하고<br>습관을 정리하여 가장 효율적인 방법으로<br class="hidden-tablet">생산성 향상에 노력합니다.</p>
+                        <p class="tit">더 좋은 코드를 만들기 위해 고민하고<br>습관을 정리하여 가장 효율적인 방법으로 <br class="d-md-none">생산성 향상에 노력합니다.</p>
                     </div>
-                    <div class="bg swiper-lazy" :data-background="imgPath+'visual_bg2.jpg'" :style="'background-image:url('+imgPath+'visual_bg_onerror.png)'"></div>
+                    <div class="bg swiper-lazy" :data-background="imgPath+'visual_bg2_pc.jpg'" :style="'background-image:url('+imgPath+'visual_bg_onerror_pc.png)'"></div>
                     <div class="swiper-lazy-preloader"></div>
                 </div>
                 <div class="swiper-slide">
                     <div class="inner">
-                        <p class="tit">광고디자인, UX/UI 디자인, 마크업 개발까지<br>다양한 기술과 경험으로 의사소통과<br class="hidden-tablet">협업에 큰 강점을 갖고 있습니다.</p>
+                        <p class="tit">광고디자인, UX/UI 디자인, 마크업 개발까지<br>다양한 기술과 경험으로 의사소통과 <br class="d-md-none">협업에 큰 강점을 갖고 있습니다.</p>
                     </div>
-                    <div class="bg swiper-lazy" :data-background="imgPath+'visual_bg3.jpg'" :style="'background-image:url('+imgPath+'visual_bg_onerror.png)'"></div>
+                    <div class="bg swiper-lazy" :data-background="imgPath+'visual_bg3_pc.jpg'" :style="'background-image:url('+imgPath+'visual_bg_onerror_pc.png)'"></div>
                     <div class="swiper-lazy-preloader"></div>
                 </div>
                 <div class="swiper-slide">
                     <div class="inner">
                         <p class="tit">SEO 최적화, 시맨틱 마크업 사용<br>검색엔진에 친화적인 설계를 지향합니다.</p>
                     </div>
-                    <div class="bg swiper-lazy" :data-background="imgPath+'visual_bg4.jpg'" :style="'background-image:url('+imgPath+'visual_bg_onerror.png)'"></div>
+                    <div class="bg swiper-lazy" :data-background="imgPath+'visual_bg4_pc.jpg'" :style="'background-image:url('+imgPath+'visual_bg_onerror_pc.png)'"></div>
                     <div class="swiper-lazy-preloader"></div>
                 </div>
                 <div class="swiper-slide">
                     <div class="inner">
-                        <p class="tit">마크업과 스타일링 위한 코딩에서 벗어나<br>꾸준한 역량 개발을 통해 FE 개발자로<br class="hidden-tablet">성장하고 있습니다.</p>
+                        <p class="tit">마크업과 스타일링 위한 코딩에서 벗어나<br>꾸준한 역량 개발을 통해 FE 개발자로 <br class="d-md-none">성장하고 있습니다.</p>
                     </div>
-                    <div class="bg swiper-lazy" :data-background="imgPath+'visual_bg5.jpg'" :style="'background-image:url('+imgPath+'visual_bg_onerror.png)'"></div>
+                    <div class="bg swiper-lazy" :data-background="imgPath+'visual_bg5_pc.jpg'" :style="'background-image:url('+imgPath+'visual_bg_onerror_pc.png)'"></div>
                     <div class="swiper-lazy-preloader"></div>
                 </div>
             </div>
@@ -126,14 +126,14 @@
                 </li>
             </ul>
             <div class="btn_area">
-                <button class="btn_more" type="button"><img class="ico" src="" data-images-path="/images/ico/arr_bottom01.svg"><span></span></button>
+                <button class="btn_more isTouch" type="button"><img class="ico" src="" data-images-path="/images/ico/arr_bottom01.svg"><span></span></button>
             </div>
         </div>
     </section>
     <!-- //프로젝트 -->
 
     <!-- 사용자 편의성 -->
-    <section id="device">
+    <section id="device" data-images-path="/portfolio/device_bg.jpg">
         <div class="inner">
             <div class="tag">MULTI-DEVICE</div>
             <div class="swiper-container pointer-none">
@@ -144,17 +144,18 @@
                     </div>
                 </div>
             </div>
-            <img class="bg_tablet pointer-none" :src="imgPath+'project_device_tablet.png'" alt="태블렛">
-            <img class="bg_pc pointer-none" :src="imgPath+'project_device_pc.png'" alt="노트북">
-            <img class="bg_mobile pointer-none" :src="imgPath+'project_device_mobile.png'" alt="스마트폰">
+            <img class="bg_tablet pointer-none" src="" data-images-path="/portfolio/device_tablet.png" alt="태블렛">
+            <img class="bg_pc pointer-none" src="" data-images-path="/portfolio/device_pc.png" alt="노트북">
+            <img class="bg_mobile pointer-none" src="" data-images-path="/portfolio/device_mobile.png" alt="스마트폰">
             <div class="txt_area">
-                <h3 class="tit_section">사용자의 편의성을 위해<br><strong>다양한 디바이스 조건에 맞춰 제작!</strong></h3>
-                <p class="desc_section">브랜드의 가치를 알리고, 마케팅 효율을 극대화 하기 위하여<br>수많은 프로젝트에서 Flexible Web 형태의 구축과 유지보수 경험을 가지고 있습니다.</p>
+                <h3 class="tit_section">사용자 편의성을 위해<br><strong>다양한 디바이스 조건에 최적화!</strong></h3>
+                <p class="desc_section">브랜드의 가치를 알리고, 마케팅 효율을 극대화 하기<br>위하여 수많은 프로젝트에서 Flexible Web 형태의 <br class="d-md-none">구축과 유지보수 경험을 가지고 있습니다.</p>
                 <button class="btn_search on" type="button">프로젝트 찾아보기<span class="cmt">반응형ㆍ적응형</span></button>
             </div>
         </div>
         <div class="rotate_top"></div>
         <div class="rotate_bottom"></div>
+        <div class="bg d-none" data-images-path="/portfolio/device_bg.jpg"></div>
     </section>
     <!-- //사용자 편의성 -->
 
@@ -163,27 +164,43 @@
         <div class="tab-container">
             <div class="tab-wrapper">
                 <div class="tab-slide tab-slide-tool isAppear">
-                    <h3 class="tit_slide">비즈니스 니즈를 충족시키기 위하여<br> 꾸준한 자기계발로 <strong class="color-primary">기술역량</strong>을 확장했습니다.</h3>
-                    <p class="desc_slide">현재를 안주하기 보다 절박함과 위기의식을 느끼고 미래에 대한 지속성 갖기위해<br>시장의 변화와 맞춰 필요한 역량을 개발하고 발전시켰습니다.</p>
-                    <div class="list_tool">
-                        <i class="item_tool indesign"><img class="logo" :src="imgPath+'professional_tool_logo/indesign.svg'"></i>
-                        <i class="item_tool illust"><img class="logo" :src="imgPath+'professional_tool_logo/illust.svg'"></i>
-                        <i class="item_tool vue"><img class="logo" :src="imgPath+'professional_tool_logo/vue.svg'"></i>
-                        <i class="item_tool sass"><img class="logo" :src="imgPath+'professional_tool_logo/sass.svg'"></i>
-                        <i class="item_tool premiere"><img class="logo" src="/img/main/professional_tool_logo/premiere.svg"></i>
-                        <i class="item_tool photoshop"><img class="logo" :src="imgPath+'professional_tool_logo/photoshop.svg'"></i>
-                        <i class="item_tool xd"><img class="logo" :src="imgPath+'professional_tool_logo/xd.svg'"></i>
-                        <i class="item_tool js"><img class="logo" :src="imgPath+'professional_tool_logo/js.svg'"></i>
-                        <i class="item_tool html"><img class="logo" :src="imgPath+'professional_tool_logo/html.svg'"></i>
-                        <i class="item_tool css"><img class="logo" :src="imgPath+'professional_tool_logo/css.svg'"></i>
-                        <i class="item_tool aftereffect"><img class="logo" :src="imgPath+'professional_tool_logo/aftereffect.svg'"></i>
-                        <i class="item_tool git"><img class="logo" :src="imgPath+'professional_tool_logo/git.svg'"></i>
-                        <i class="item_tool jquery"><img class="logo" :src="imgPath+'professional_tool_logo/jquery.svg'"></i>
-                        <i class="item_tool gsap"><img class="logo" :src="imgPath+'professional_tool_logo/gsap.svg'"></i>
-                        <img class="line" :src="imgPath+'professional_tool_line.svg'" alt="">
+                    <h3 class="tit_slide">꾸준한 자기계발로<br><strong class="color-primary">기술역량</strong>을 확장했습니다.</h3>
+                    <p class="desc_slide">현재를 안주하기 보다 절박함과 위기의식을 느끼고<br>미래에 대한 지속성 갖기위해 시장의 변화와 맞춰 필요한 <br class="d-md-none">역량을 개발하고 발전시켰습니다.</p>
+                    <div class="swiper-container">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                                <i class="item_tool indesign"><img class="logo" src="" data-images-path="/portfolio/professional_tool_logo/indesign.svg"></i>
+                                <i class="item_tool illust"><img class="logo" src="" data-images-path="/portfolio/professional_tool_logo/illust.svg"></i>
+                            </div>
+                            <div class="swiper-slide">
+                                <i class="item_tool premiere"><img class="logo" src="" data-images-path="/portfolio/professional_tool_logo/premiere.svg"></i>
+                                <i class="item_tool aftereffect"><img class="logo" src="" data-images-path="/portfolio/professional_tool_logo/aftereffect.svg"></i>
+                            </div>
+                            <div class="swiper-slide">
+                                <i class="item_tool xd"><img class="logo" src="" data-images-path="/portfolio/professional_tool_logo/xd.svg"></i>
+                                <i class="item_tool photoshop"><img class="logo" src="" data-images-path="/portfolio/professional_tool_logo/photoshop.svg"></i>
+                            </div>
+                            <div class="swiper-slide">
+                                <i class="item_tool html"><img class="logo" src="" data-images-path="/portfolio/professional_tool_logo/html.svg"></i>
+                                <i class="item_tool git"><img class="logo" src="" data-images-path="/portfolio/professional_tool_logo/git.svg"></i>
+                            </div>
+
+                            <div class="swiper-slide">
+                                <i class="item_tool css"><img class="logo" src="" data-images-path="/portfolio/professional_tool_logo/css.svg"></i>
+                                <i class="item_tool sass"><img class="logo" src="" data-images-path="/portfolio/professional_tool_logo/sass.svg"></i>
+                            </div>
+                            <div class="swiper-slide">
+                                <i class="item_tool jquery"><img class="logo" src="" data-images-path="/portfolio/professional_tool_logo/jquery.svg"></i>
+                                <i class="item_tool js"><img class="logo" src="" data-images-path="/portfolio/professional_tool_logo/js.svg"></i>
+                            </div>
+                            <div class="swiper-slide">
+                                <i class="item_tool vue"><img class="logo" src="" data-images-path="/portfolio/professional_tool_logo/vue.svg"></i>
+                                <i class="item_tool gsap"><img class="logo" src="" data-images-path="/portfolio/professional_tool_logo/gsap.svg"></i>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="tab-slide tab-slide-license">
+                <div class="tab-slide tab-slide-license" data-images-path="/portfolio/professional_license_bg_pc.jpg">
                     <h3 class="tit_slide"><strong class="color-primary">수상경력 및 자격증</strong>은 새로운 도전과 경험을<br>성취하고자 노력한 결과입니다.</h3>
                     <p class="desc_slide">수 많은 대회에서 실패와 성공 그리고 팀원들과 협업 경험을 바탕으로<br>대학시절 창업동아리, 학생자치기구에서 핵심적인 역할을 할 수 있었습니다.</p>
                     <div class="swiper-container">
@@ -263,10 +280,10 @@
                     </div>
                 </div>
             </div>
+            <!-- Add Navigation -->
+            <div class="swiper-button-prev swiper-button-white" slot="button-prev"></div>
+            <div class="swiper-button-next swiper-button-white" slot="button-next"></div>
         </div>
-        <!-- Add Navigation -->
-        <div class="swiper-button-prev swiper-button-white" slot="button-prev"></div>
-        <div class="swiper-button-next swiper-button-white" slot="button-next"></div>
         <!-- Add Pagination -->
         <div class="swiper-pagination"></div>
     </section>

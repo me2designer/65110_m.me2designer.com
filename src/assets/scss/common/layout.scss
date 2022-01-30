@@ -57,7 +57,7 @@ $innerPd:2.2rem;
 
 /* 맨 위로 이동하기 */ 
 $aisdeBtnTopH: 5rem;
-#aisdeBtnTop {z-index:10;min-width:$wrapW;margin-left:0 !important}
+#aisdeBtnTop {z-index:30;min-width:$wrapW;margin-left:0 !important}
 #aisdeBtnTop .btn_top {display:flex;flex-direction:column;justify-content:center;align-items:center;position:absolute;bottom:#{$aisdeBtnTopH / -2};right:2rem;z-index:1;width:$aisdeBtnTopH;height:$aisdeBtnTopH;color:#fff;fill:#fff;background:$G-gradPrimary;transition:all 0.4s ease-in-out}
 #aisdeBtnTop .btn_top svg {margin-bottom:0.2em;font-size:1.15rem}
 #aisdeBtnTop .btn_top span {font-size:1.1rem}

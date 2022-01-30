@@ -21,7 +21,7 @@ $imgPath : "/img/main/";
         }
         .videoLayer {
             @include gradSlideBtn;
-            position:absolute;top:50%;left:50%;transform:translate(-50%, 12rem);
+            position:absolute;top:50%;left:50%;transform:translate(-50%, 13rem);
         }
         @include md {
             height:44rem;
@@ -38,7 +38,7 @@ $imgPath : "/img/main/";
 
     #visual .swiper-slide {
         .tit {
-            position:absolute;top:50%;left:50%;font-size:1.65rem;text-align:center;line-height:1.45em;color:#fff;white-space:nowrap;text-shadow:0.1rem 0.1rem 0.5rem rgba(#000, 0.5);opacity:0;transform:translate(-40%, 1.9em);
+            position:absolute;top:50%;left:50%;font-size:1.65rem;text-align:center;line-height:1.6em;color:#fff;white-space:nowrap;text-shadow:0.1rem 0.1rem 0.5rem rgba(#000, 0.5);opacity:0;transform:translate(-40%, 1.9em);
         }
         .bg {
             position:absolute;top:0;bottom:0;left:0;right:0;background:center center no-repeat;background-size:cover;transform:rotate(.001deg) scale(1);
@@ -161,7 +161,7 @@ $imgPath : "/img/main/";
 
     /* 프로젝트 */
     #project {
-        background-color:#f5f7f8;
+        position:relative;background-color:#f5f7f8;
         .tit_section {
             padding:6.6rem 0 2.5rem;font-size:2.6rem;text-align:center;line-height:1.37em;letter-spacing:-0.03em;
         }
@@ -190,7 +190,7 @@ $imgPath : "/img/main/";
     }
 
     #project .list_project {
-        display:flex;flex-wrap:wrap;margin:#{$innerPd / -2} 0;transition:all 1s ease-in-out;
+        display:flex;flex-wrap:wrap;margin:#{$innerPd / -2} auto;transition:all 1s ease-in-out;
         &:empty {
             &::after {
                 content:"태그(#)가 선택되지 않았습니다.";display:flex;justify-content:center;align-items:center;width:100%;padding-top:65px;font-size:30px;color:#cacaca;text-shadow:1px 1px 0 #fff;
@@ -200,14 +200,14 @@ $imgPath : "/img/main/";
             }
         }
         @include md {
-            justify-content:space-between;
+            justify-content:center;max-width:92rem;
         }
     }
 
     #project .item_project {
         position:relative;width:100%;margin:#{$innerPd / 2} 0;background-color:#fff;transition:0.3s $G-easeHover;
         @include md {
-            width:calc(50% - #{$innerPd / 2});
+            width:calc(50% - #{$innerPd});margin:#{$innerPd / 2};
         }
     }
 
@@ -294,7 +294,7 @@ $imgPath : "/img/main/";
             span::after {
                 content:"더보기";
             }
-            &.btn-loading {
+            &.is-touch {
                 svg {
                     $name: inline-#{unique-id()};
                     animation:#{$name} 0.5s alternate infinite $G-easeHover;
@@ -320,29 +320,56 @@ $imgPath : "/img/main/";
 
     /* 사용자 편의성 */
     #device {
-        overflow:hidden;position:relative;height:1296px;background: #292B31 url(#{$imgPath}device_bg.jpg) 50% 0 no-repeat;background-size:cover;background-attachment:fixed;
+        position:relative;height:58rem;background:#292B31 50% 0 no-repeat;background-size:cover;background-attachment:fixed;
+        .inner {
+            padding:0;
+        }
+        @include safariHack {
+            background:none;
+            .bg {
+                position:fixed;top:0;bottom:0;left:0;right:0;z-index:-10;background:#292B31 50% 0 no-repeat;background-size:cover;transform:translateZ(0);will-change:transform;
+            }
+        }
+        @include md {
+            height:80rem;
+        }
     }
 
     #device .tag {
-        display:flex;align-items:center;position:absolute;top:5px;left:316px;z-index:40;width:238px;height:50px;padding-left:28px;border-radius:2em;font-family:"CenturyGothic";font-size:26px;font-weight:bold;font-style:italic;color:#fff;line-height:1em;background-color:#ff0032;
+        display:flex;align-items:center;position:absolute;top:-1rem;left:50%;z-index:40;width:10.5em;height:2.3em;padding-left:1.2em;border-radius:2em;font-family:"CenturyGothic";font-size:1.1rem;font-weight:bold;font-style:italic;color:#fff;line-height:1em;background-color:#ff0032;transform:translateX(-90%);
         &::after {
             $name: inline-#{unique-id()};
-            content:"";position:absolute;top:50%;right:20px;width:7px;height:7px;background-color:#fff;border-radius:100%;transform:translateY(-50%);animation:#{$name} 0.5s infinite alternate ease-in-out;
+            content:"";position:absolute;top:50%;right:1em;width:0.5em;height:0.5em;background-color:#fff;border-radius:100%;transform:translateY(-50%);animation:#{$name} 0.5s infinite alternate ease-in-out;
             @keyframes #{$name} {
                 100%        {opacity:0.5}
             }
         }
+        @include md {
+            font-size:1.6rem;transform:translateX(-115%);
+        }
     }
 
     #device .swiper-container {
-        $value:
-            'pc'         49px     388px    21   750px   468px    0,
-            'tablet'     236px    131px    11   427px   319px    6px,
-            'mobile'     275px    1132px   31   133px   287px    13px,
+        $value_sm:
+            'pc'        0.6rem    21   18.8rem   11.8rem    0         -40.5%,
+            'tablet'    4.1rem    11   12.6rem   9.4rem     0.3rem    -119.5%,
+            'mobile'    4.87rem   31   4.24rem   9.01rem    0.5rem     262%,
         ;
-        @each $class, $top, $left, $z-index, $width, $height, $bdr, $event in $value {
+        @each $class, $top, $z-index, $width, $height, $bdr, $transX in $value_sm {
             &.swiper-#{$class} {
-                position:absolute;top:#{$top};left:#{$left};z-index:#{$z-index};width:#{$width};height:#{$height};border-radius:#{$bdr};
+                position:absolute;top:#{$top};left:50%;z-index:#{$z-index};width:#{$width};height:#{$height};border-radius:#{$bdr};transform:translateX(#{$transX});
+            }
+        }
+        @include md {
+            $value_md:
+                'pc'        1rem      21   36.15rem   22.69rem      0      -40.5%,
+                'tablet'    7.7rem    11   24.23rem   18.08rem     0.3rem    -119.5%,
+                'mobile'    9.15rem   31   8.154rem   17.33rem    0.5rem     262%,
+            ;
+            @each $class, $top, $z-index, $width, $height, $bdr, $transX in $value_md {
+                &.swiper-#{$class} {
+                    position:absolute;top:#{$top};left:50%;z-index:#{$z-index};width:#{$width};height:#{$height};border-radius:#{$bdr};transform:translateX(#{$transX});
+                }
             }
         }
     }
@@ -355,35 +382,50 @@ $imgPath : "/img/main/";
     }
 
     #device {
-        $value:
-            'tablet'     220px    98px     10    494px,
-            'pc'         25px     248px    20   1031px,
-            'mobile'     264px    1111px   30    174px,
+        $value_sm:
+            'pc'         0         20   26rem    -43%,
+            'tablet'     3.6rem    10   14.6rem  -110%,
+            'mobile'     4.5rem    30   5.5rem   190%,
         ;
-        @each $class, $top, $left, $z-index, $width in $value {
+        @each $class, $top, $z-index, $width, $transX in $value_sm {
             .bg_#{$class} {
-                position:absolute;top:#{$top};left:#{$left};z-index:#{$z-index};width:#{$width};height:auto;
+                position:absolute;top:#{$top};left:50%;z-index:#{$z-index};width:#{$width};height:auto;transform:translateX(#{$transX});
+            }
+        }
+        @include md {
+            $value_md:
+                'pc'         0         20   50rem    -43%,
+                'tablet'     6.8rem    10   28.1rem  -110%,
+                'mobile'     8.5rem    30   10.58rem   190%,
+            ;
+            @each $class, $top, $z-index, $width, $transX in $value_md {
+                .bg_#{$class} {
+                    position:absolute;top:#{$top};left:50%;z-index:#{$z-index};width:#{$width};height:auto;transform:translateX(#{$transX});
+                }
             }
         }
     }
 
     #device .txt_area {
-        position:absolute;top:680px;left:50%;transform:translateX(-50%);
+        width:100%;padding-top:18.7rem;
         .tit_section {
-            padding-bottom:30px;font-size:41px;color:#fff;text-align:center;letter-spacing:-0.03em;
+            font-size:2.6rem;color:#fff;text-align:center;line-height:1.37em;letter-spacing:-0.03em;
             strong {
                 font-weight:900;
             }
         }
         .desc_section {
-            padding-bottom:90px;font-size:20px;color:#fff;text-align:center;
+            padding:1.2em 0 4rem;font-size:1.65rem;color:#fff;text-align:center;line-height:1.6em;word-break:keep-all;
         }
         .btn_search {
-            @include gradSlideBtn($pd:0 40px);
+            @include gradSlideBtn($pd:0 3.5rem);
             display:block;margin:0 auto;
             .cmt {
-                margin-left:9px;padding:5px 8px;font-size:14px;color:#fff;background-color:rgba(#0d0d0d, 0.2);
+                margin-left:0.9rem;padding:0.5rem 0.8rem;font-size:1.4rem;color:#fff;background-color:rgba(#0d0d0d, 0.2);
             }
+        }
+        @include md {
+            padding-top:31rem;
         }
     }
 
@@ -394,11 +436,11 @@ $imgPath : "/img/main/";
         ;
         @each $Y, $X, $bgc in $value {
             .rotate_#{$Y} {
-                position:absolute;width:120%;height:500px;background-color:#{$bgc};transform-origin:#{$X} #{$Y};transform:rotate( 5.2deg);z-index:0;
+                position:absolute;width:120%;height:20vw;background-color:#{$bgc};transform-origin:#{$X} #{$Y};transform:rotate(10deg);z-index:0;
                 @if ($Y == top){
-                    left:0;top:-450px;
+                    left:0;top:-20vw;
                 } @else {
-                    right:0;bottom:-450px;
+                    right:0;bottom:-20vw;
                 }
             }
         }
@@ -414,96 +456,37 @@ $imgPath : "/img/main/";
 
     /* 경력개발 */
     #professional {
-        padding-bottom:78px;
+        position:relative;background-color:#fff;border:1px solid transparent;
     }
 
     #professional .tab-container {
         .tab-wrapper {
             .tab-slide {
-                padding-top:20px;
                 .tit_slide {
-                    padding-bottom:30px;font-size:41px;text-align:center;letter-spacing:-0.03em;
+                    padding-top:2rem;font-size:2.6rem;text-align:center;line-height:1.37em;letter-spacing:-0.03em;
                 }
                 .desc_slide {
-                    font-size:20px;color:#767676;text-align:center;
+                    padding-top:1.2em;font-size:1.65rem;color:#767676;text-align:center;line-height:1.6em;word-break:keep-all;
                 }
             }
         }
+    }
+
+    #professional .tab-slide-tool .swiper-slide {
+        display:flex;justify-content:space-around;width:28rem;padding:5.5rem 0;
     }
 
     #professional .tab-slide-tool {
-        padding-bottom:110px;
-        .list_tool {
-            position:relative;width:1192px;height:525px;margin:95px auto 0;
-            .item_tool {
-                display:flex;justify-content:center;align-items:center;position:absolute;z-index:1;width:132px;height:132px;border-radius:100%;background-color:#fff;box-shadow:2px 2px 10px 0 rgba(0, 0, 0, 0.08);
-                .logo {
-                    height:60px;font-size:60px;
-                }
-            }
-            .line {
-                position:absolute;top:50%;left:0;width:1192px;height:420px;stroke:#000;opacity:0;transform:translateY(-50%);
-            }
-        }
-        &.tab-slide-active.appear {
-            .line {
-                opacity:1;transition:all 1s 0.5s ease-in-out;
-            }
-        }
-    }
-
-    #professional .item_tool {
-        $i : 0;
-        $value:
-            'indesign'       0        212px   ''       ,
-            'vue'            0        636px   ''       ,
-            'illust'         0        424px   ''       ,
-            'sass'           0        848px   ''     ,
-            'premiere'       201px    0       ''       ,
-            'photoshop'      201px    212px   2        ,
-            'xd'             201px    424px   ''       ,
-            'js'             201px    636px   ''       ,
-            'html'           201px    848px   2        ,
-            'css'            201px    1060px  ''       ,
-            'aftereffect'    393px    212px   ''       ,
-            'git'            393px    424px   ''     ,
-            'jquery'         393px    636px   ''       ,
-            'gsap'           393px    848px   ''     ,
-        ;
-        @each $class, $top, $left, $z-index, $width in $value {
-            $i : $i + 1;
-            &.#{$class} {
-                top:#{$top};left:#{$left};z-index:#{$z-index} !important;transition:all 1s #{$i * 0.05}s ease-in-out;
-            }
-        }
-    }
-
-    #professional .tab-slide-tool:not(.tab-slide-active.appear) .item_tool {
-        $value:
-            'indesign'       201px    212px     ,
-            'vue'            201px    848px     ,
-            'illust'         201px    212px     ,
-            'sass'           201px    848px     ,
-            'premiere'       201px    212px     ,
-            'photoshop'      201px    212px     ,
-            'xd'             201px    212px     ,
-            'js'             201px    848px     ,
-            'html'           201px    848px     ,
-            'css'            201px    848px     ,
-            'aftereffect'    201px    212px     ,
-            'git'            201px    848px     ,
-            'jquery'         201px    848px     ,
-            'gsap'           201px    848px     ,
-        ;
-        @each $class, $top, $left in $value {
-            &.#{$class} {
-                top:#{$top};left:#{$left};transition:none;
+        .item_tool {
+            display:inline-flex;justify-content:center;align-items:center;width:12rem;height:12rem;border-radius:100%;background-color:#fff;box-shadow:0.2rem 0.2rem 1rem 0 rgba(0, 0, 0, 0.08);
+            .logo {
+                height:6rem;font-size:6rem;
             }
         }
     }
 
     #professional .tab-slide-license {
-        padding-bottom:45px;background:url(#{$imgPath}professional_license_bg.jpg) no-repeat center bottom 45px;background-size:100% auto;
+        padding-bottom:45px;background:no-repeat center bottom 45px;background-size:100% auto;
         .swiper-container {
             width:100%;height:670px;padding:225px 0 290px;
             .swiper-wrapper {
@@ -679,10 +662,10 @@ $imgPath : "/img/main/";
     #professional .tab-nav {
         text-align:center;
         .tab-btn {
-            @include gradSlideBtn;
-            margin:0 7px;
+            @include gradSlideBtn($width:31rem, $mg:1rem auto);
+            display:flex;
             .ico {
-                font-size:28px;fill:$G-colorPrimary;margin-right:0.25em;
+                font-size:2.8rem;fill:$G-colorPrimary;margin-right:0.25em;
             }
         }
         .tab-btn-active {
@@ -692,6 +675,23 @@ $imgPath : "/img/main/";
             }
             .ico {
                 fill:#fff;transition:all 0.4s #{$G-easeHover};
+            }
+        }
+        @include md {
+            .tab-btn {
+                @include gradSlideBtn($mg:0 0.5rem, $pd:0 4rem);
+                .ico {
+                    font-size:2.8rem;fill:$G-colorPrimary;margin-right:0.25em;
+                }
+            }
+            .tab-btn-active {
+                color:#fff;border-color:transparent;transition:border-color 0.4s 0.2s #{$G-easeHover}, color 0.4s #{$G-easeHover};
+                &::after {
+                    right:0;
+                }
+                .ico {
+                    fill:#fff;transition:all 0.4s #{$G-easeHover};
+                }
             }
         }
     }
@@ -706,7 +706,7 @@ $imgPath : "/img/main/";
 
     /* 근무이력 */
     #career {
-        position:relative;
+        position:relative;background-color:#fff;
         .tit_section {
             padding-top:5rem;font-size:2.6rem;text-align:center;line-height:1.37em;letter-spacing:-0.03em;
         }
@@ -721,15 +721,15 @@ $imgPath : "/img/main/";
     }
 
     #career .swiper-slide .btn_area {
-        position:absolute;right:30px;bottom:30px;z-index:1;opacity:0;transform:translateY(70%);transition:all 0.5s $G-easeHover;
+        position:absolute;right:$innerPd;bottom:$innerPd;z-index:1;opacity:0;transform:translateY(70%);transition:all 0.5s 0.3s $G-easeHover;pointer-events:none;
         .btn_search {
             @include gradSlideBtn($pd:0);
-            width:64px;height:64px;font-size:32px;border:0;box-shadow:6px 6px 6px rgba(0, 0, 0, 0.1);
+            width:5.5rem;height:5.5rem;font-size:2.4rem;border:0;box-shadow:0.3rem 0.3rem 0.6rem rgba(0, 0, 0, 0.1);
         }
         .tooltip {
-            overflow:hidden;position:absolute;top:50%;right:30px;z-index:-1;transform:translateY(-50%);
+            overflow:hidden;position:absolute;top:50%;right:$innerPd;z-index:-1;transform:translateY(-50%);
             .tit {
-                display:flex;align-items:center;height:45px;padding:0 40px 0 20px;border-radius:2em 0 0 2em;font-size:16px;color:#fff;line-height:1em;white-space:nowrap;background-color:rgba(#000,0.85);opacity:0;transform:translateX(100%);
+                display:flex;align-items:center;height:4rem;padding:0 40px 0 20px;border-radius:2em 0 0 2em;font-size:1.4rem;color:#fff;line-height:1em;white-space:nowrap;background-color:rgba(#000,0.85);opacity:0;transform:translateX(0);
                 .corp {
                     color:$G-colorPrimary;margin-right:5px;
                 }
@@ -737,15 +737,28 @@ $imgPath : "/img/main/";
         }
     }
 
-    #career .swiper-slide:hover .btn_area {
-        opacity:1;transform:translateY(0);
+    #career .swiper-slide.swiper-slide-active .btn_area {
+        $name: inline-#{unique-id()};
+        opacity:1;transform:translateY(0);animation:#{$name} 0.3s 3.2s forwards $G-easeHover;pointer-events:all;
+        @keyframes #{$name} {
+            50%          {pointer-events:none;}
+            100%         {opacity:0;transform:translateY(70%);pointer-events:none;}
+        }
         .tit {
             $name: inline-#{unique-id()};
-            animation:#{$name} 2.5s 0.3s forwards $G-easeHover;
+            animation:#{$name} 2.5s 0.6s forwards $G-easeHover;
             @keyframes #{$name} {
-                0%, 100%         {opacity:0;transform:translateX(100%)}
-                30%, 70%         {opacity:1;transform:translateX(0)}
+                60%         {opacity:1;transform:translateX(0)}
+                100%        {opacity:0;transform:translateX(100%)}
             }
+        }
+    }
+
+    #career .swiper-slide.swiper-slide-touch-active .btn_area {
+        $name: inline-#{unique-id()};
+        opacity:0;transform:translateY(70%);animation:#{$name} 0.3s forwards $G-easeHover;
+        @keyframes #{$name} {
+            100%         {opacity:1;transform:translateY(0);pointer-events:all}
         }
     }
 
@@ -786,6 +799,19 @@ $imgPath : "/img/main/";
         }
     }
 
+    #career .swiper-button-white {
+        width:4rem;height:6.5rem;margin-top:-3.25rem;background-color:rgba(#000,0.15);background-size:30%;
+        &.swiper-button-prev {
+            left:0;
+        }
+        &.swiper-button-next {
+            right:0;
+        }
+        @include sm {
+            display:none;
+        }
+    }
+
     #career .swiper-pagination {
         position:relative;
         .swiper-pagination-bullet {
@@ -809,7 +835,7 @@ $imgPath : "/img/main/";
             padding-top:9rem;font-size:2.6rem;text-align:center;line-height:1.37em;letter-spacing:-0.03em;
         }
         .desc_section {
-            padding:1.2em 0 4rem;font-size:1.6rem;color:#767676;text-align:center;line-height:1.6em;word-break:keep-all;
+            padding:1.2em 0 4rem;font-size:1.65rem;color:#767676;text-align:center;line-height:1.6em;word-break:keep-all;
         }
     }
 

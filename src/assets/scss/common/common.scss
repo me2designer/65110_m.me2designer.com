@@ -10,9 +10,9 @@
 /****************************************************************************
     utilities Class                        https://getbootstrap.com 참고함
 ****************************************************************************/
-/* is Breakpoints */ 
+/* Hiding elements */ 
 @include md {
-    .hidden-tablet {display:none !important}
+    .d-md-none {display:none !important}
 }
 
 /* color */

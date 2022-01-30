@@ -46,11 +46,11 @@ $(function(){/*
     var lastScrollTop = 0;
     var delta = 5;
     var navbarHeight = $header.outerHeight();
-    var visualH = $('#visual').outerHeight();    
+    var visualH = $('#visual').outerHeight();
 
     $(window).scroll(function(event){
         var st = $(this).scrollTop();
-        
+
         if ($gnb.css("display") == "block" || st <= visualH / 2) {
             return;
         }
@@ -145,6 +145,9 @@ $(function(){/*
 
 
 
+})();/*
+■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+*/(function(){
 
 
 
@@ -172,6 +175,32 @@ $(function(){/*
             // 스크롤 UP 액션
             $wrap.addClass('is-hidden');
         }
+    });
+
+
+
+})();/*
+■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+*/(function(){
+
+
+
+    let $wrap = $('.isTouch');
+
+    if (!$wrap.length) return;
+
+    $wrap.each(function(i, each) {
+        $this = $(each);
+        $this.removeClass('isTouch')
+
+        $this.bind('touchstart', function(e) {
+            $this.addClass('is-touch');
+        });
+
+        $this.bind('touchend', function(e) {
+            $this.removeClass('is-touch');
+        });
+
     });
 
 
