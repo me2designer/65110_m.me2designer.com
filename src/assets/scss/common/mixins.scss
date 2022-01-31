@@ -11,7 +11,7 @@
         @content;
     }
 }
-  
+
 @mixin md {
     @media (min-width: #{$G-breakpoint-medium}) {
         @content;
@@ -20,6 +20,30 @@
 
 @mixin lg {
     @media (min-width: #{$G-breakpoint-large}) {
+        @content;
+    }
+}
+
+@mixin xl {
+    @media (min-width: #{$G-breakpoint-extraLarge}) {
+        @content;
+    }
+}
+
+@mixin xxl {
+    @media (min-width: #{$G-breakpoint-extraExtraLarge}) {
+        @content;
+    }
+}
+
+@mixin qhd {
+    @media (min-width: #{$G-breakpoint-qhd}) {
+        @content;
+    }
+}
+
+@mixin uhd {
+    @media (min-width: #{$G-breakpoint-uhd}) {
         @content;
     }
 }
@@ -44,7 +68,7 @@
 }
 
 @mixin safariHack() {
-    @media not all and (min-resolution:.001dpcm) { 
+    @media not all and (min-resolution:.001dpcm) {
         @supports (-webkit-appearance:none) {
             @content;
         }
@@ -175,15 +199,15 @@
     overflow:hidden;display:inline-flex;justify-content:center;align-items:center;position:relative;z-index:1;width:#{$width};height:#{$height};margin:#{$mg};padding:#{$pd};font-size:#{$fz};border:solid 1px #{$bdc};border-radius:#{$bdr};line-height:1em;white-space:nowrap;
     &::after {
         content:"";position:absolute;top:0;bottom:0;left:0;right:100%;z-index:-1;background:#{$G-gradPrimary};
-    }    
+    }
     svg {
         fill:#000;font-size:0.8em;
-    }    
+    }
     &.on, &.is-touch {
         color:#fff;border-color:transparent;
         &::after {
             right:0;
-        }        
+        }
         svg {
             fill:#fff;
         }

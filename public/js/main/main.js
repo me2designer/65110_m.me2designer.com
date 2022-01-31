@@ -66,10 +66,8 @@ $(function(){/*
             })
         });
     } else {
-        $wrap.find('.videoLayer').videoLayer();
+        $wrap.find('.videoLayer').videoLayer()
     }
-
-
 
 
 
@@ -724,7 +722,7 @@ $(function(){/*
             });
             $slideTop_clone.find('.date').text(each.date);
             $slideTop_clone.find('.desc').text(each.description);
-            $slideThumb_clone.attr('data-background', SERVER.images+'/portfolio/professional_activity/'+each.thumb);
+            $slideThumb_clone.attr('data-background', SERVER.images+'/portfolio/professional_activity/'+each.thumb+'_pc.jpg');
 
             $slideTop_clone.appendTo($swiperTop.find('.swiper-wrapper'))
             $slideThumb_clone.appendTo($swiperThumb.find('.swiper-wrapper'))
@@ -738,44 +736,27 @@ $(function(){/*
         // 본문
         let swiperTop = new Swiper($swiperTop, {
             autoplay: {
-                delay: 3000,
+                delay: 4000,
                 disableOnInteraction : false,
             },
             speed: 600,
+            slidesPerView: 'auto',
+            slideToClickedSlide: true,
+            centeredSlides: true,            
             loop: true,
-            slidesPerView: 3,
-            loopedSlides: 3,
-            centeredSlides: true,
-            direction: 'vertical',
-            pagination: {
-                el: $wrap.find('.swiper-pagination'),
-                type: 'fraction',
-            },
+            loopedSlides: $swiperTop.find('.swiper-slide').length,
             navigation: {
                 nextEl: $wrap.find('.swiper-button-next'),
                 prevEl: $wrap.find('.swiper-button-prev'),
-            },
-            on : {
-                slideChangeTransitionStart : function(){
-                    let $slide = $swiperTop.find('.swiper-slide');
-                    $slide.removeClass('is-active');
-                },
-                slideChangeTransitionEnd : function(){
-                    let $this = $swiperTop.find('[data-swiper-slide-index="'+this.realIndex+'"]');
-                    $this.addClass('is-active');
-                },
             },
         });
 
         // 썸네일
         let swiperThumb = new Swiper($swiperThumb, {
-            centeredSlides: true,
-            touchRatio: 0.2,
-            slideToClickedSlide: true,
+            slidesPerView: 1,            
             loop: true,
-            slidesPerView: 1,
-            loopedSlides: 3,
-            direction: 'vertical',
+            loopedSlides: $swiperThumb.find('.swiper-slide').length,
+            effect: 'fade',
             lazy: true,
             lazy: {
                 loadPrevNext: true,
@@ -791,7 +772,7 @@ $(function(){/*
             mutations.forEach(mutation => {
                 if (mutation.attributeName === "class") {
                     if ($wrap.hasClass('tab-slide-active')) {
-                        swiperTop.slideTo($wrap.find('.swiper-top [data-swiper-slide-index=0]').index(), 0, true);
+                        swiperTop.slideTo($swiperTop.find('[data-swiper-slide-index="0"]').eq(1).index(), 0, true);
                         swiperTop.autoplay.start();
                     } else {
                         swiperTop.autoplay.stop();
@@ -844,12 +825,13 @@ $(function(){/*
     const afterLoad = function() {
         // swiper
         let swiper = new Swiper($swiper, {
-            // autoplay: {
-            //     delay: 6000,
-            //     disableOnInteraction : false,
-            // },
+            autoplay: {
+                delay: 6000,
+                disableOnInteraction : false,
+            },
             speed: 1400,
             slidesPerView: 'auto',
+            spaceBetween: 30,
             slideToClickedSlide: true,
             centeredSlides: true,
             loop: true,
@@ -875,7 +857,7 @@ $(function(){/*
                 slideChangeTransitionEnd: function() {
                     let $this = $(this.el).find('[data-swiper-slide-index="'+this.realIndex+'"]');
 
-                    $this.siblings().removeClass('swiper-slide-touch-active').find('.btn_area').removeAttr('style');                    
+                    $this.siblings().removeClass('swiper-slide-touch-active').find('.btn_area').removeAttr('style');
                 },
             }
         });

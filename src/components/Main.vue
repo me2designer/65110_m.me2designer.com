@@ -200,9 +200,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="tab-slide tab-slide-license" data-images-path="/portfolio/professional_license_bg_pc.jpg">
-                    <h3 class="tit_slide"><strong class="color-primary">수상경력 및 자격증</strong>은 새로운 도전과 경험을<br>성취하고자 노력한 결과입니다.</h3>
-                    <p class="desc_slide">수 많은 대회에서 실패와 성공 그리고 팀원들과 협업 경험을 바탕으로<br>대학시절 창업동아리, 학생자치기구에서 핵심적인 역할을 할 수 있었습니다.</p>
+                <div class="tab-slide tab-slide-license" data-images-path="/portfolio/professional_license_bg_mo.jpg">
+                    <h3 class="tit_slide"><strong class="color-primary">수상경력 및 자격증</strong> 새로운 도전과<br>경험에 성취한 결과입니다.</h3>
+                    <p class="desc_slide d-sm-none">수 많은 대회에서 실패와 성공 그리고 팀원들과<br>협업 경험을 바탕으로 대학시절 대외활동을 <br class="d-md-none">통해 핵심적인 역할을 할 수 있었습니다.</p>
                     <div class="swiper-container">
                         <div class="swiper-wrapper">
                             <div class="swiper-slide">
@@ -218,30 +218,28 @@
                     </div>
                 </div>
                 <div class="tab-slide tab-slide-activity">
-                    <h3 class="tit_slide">미래의 발판을 건설하기 위해<br><strong class="color-primary">인턴·대외활동 및 직무교육</strong>에 참여했습니다.</h3>
-                    <p class="desc_slide">이른시기 독립적인 생활로 용돈과 학업에 대부분을 스스로 해결하는 과정에서<br>사회생활과 자기계발의 중요성을 새삼 깨달았습니다</p>
-                    <div class="inner">
-                        <div class="swiper-container swiper-top">
-                            <div class="swiper-wrapper">
-                                <div class="swiper-slide">
-                                    <div class="text-area">
-                                        <p class="corp"></p>
-                                        <p class="tit"></p>
-                                        <p class="date"></p>
-                                        <p class="desc"></p>
-                                    </div>
+                    <h3 class="tit_slide">다양한 <strong class="color-primary">인턴·대외활동</strong> 및<br>필요한 <strong class="color-primary">직무교육</strong>을 진행했습니다.</h3>
+                    <p class="desc_slide d-sm-none">이른시기 독립적인 생활로 용돈과<br>학업에 대부분을 스스로 해결하는 과정에서 사회생활과 자기계발의 중요성을 새삼 깨달았습니다</p>
+                    <div class="swiper-container swiper-thumb">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide swiper-lazy" data-background=""><div class="swiper-lazy-preloader"></div></div>
+                        </div>
+                    </div>
+                    <div class="swiper-container swiper-top">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                                <div class="text-area">
+                                    <p class="corp"></p>
+                                    <p class="tit"></p>
+                                    <p class="date"></p>
+                                    <p class="desc"></p>
                                 </div>
                             </div>
-                            <!-- Add Pagination -->
-                            <div class="swiper-pagination"></div>
-                            <!-- Add Navigation -->
-                            <div class="swiper-button-prev swiper-button"><img src="" data-images-path="/images/ico/chevron-up_regular.svg" alt="위로"></div>
-                            <div class="swiper-button-next swiper-button"><img src="" data-images-path="/images/ico/chevron-down_regular.svg" alt="아래로"></div>
                         </div>
-                        <div class="swiper-container swiper-thumb">
-                            <div class="swiper-wrapper">
-                                <div class="swiper-slide swiper-lazy" data-background=""><div class="swiper-lazy-preloader"></div></div>
-                            </div>
+                        <!-- Add Navigation -->
+                        <div class="swiper-button">
+                            <div class="swiper-button-prev swiper-button-black"></div>
+                            <div class="swiper-button-next swiper-button-black"></div>
                         </div>
                     </div>
                 </div>

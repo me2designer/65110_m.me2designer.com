@@ -11,6 +11,10 @@
     utilities Class                        https://getbootstrap.com 참고함
 ****************************************************************************/
 /* Hiding elements */ 
+@include sm {
+    .d-sm-none {display:none !important}
+}
+
 @include md {
     .d-md-none {display:none !important}
 }
