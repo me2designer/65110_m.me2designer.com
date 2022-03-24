@@ -11,6 +11,7 @@ FILES([
     SERVER.public+'/js/public.js',
     SERVER.public+'/lib/swiper/swiper@4.5.1.js',
     SERVER.public+'/lib/tweenmax/tweenmax.js',
+    '//www.gstatic.com/charts/loader.js',
     '//me2designer.com/js/analysis.js',    ,
     '/js/common/common.js',
     '/js/main/main.js',

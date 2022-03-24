@@ -831,7 +831,7 @@ $(function(){/*
             },
             speed: 1400,
             slidesPerView: 'auto',
-            spaceBetween: 30,
+            spaceBetween: 30,            
             slideToClickedSlide: true,
             centeredSlides: true,
             loop: true,
@@ -895,124 +895,139 @@ $(function(){/*
 
 
 
-
 })();/*
 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 */(function(){
 
 
+  let myKey = '1PbOKz2JGK93EX7BN1f-2T41DT5JiQ9nrSCHtHzD1U6g';
 
-    /* 티스토리 API */
-    const getTistory = function() {
-        let arg = arguments[0];
-        let default_option = {
-            pars : {
-                'accessToken' : '014f0adecdf2a12798c783abbc7a0498_3ea393c3f6e235ff61d1f6e3557bbdb9',
-                'outputType' : 'json', //xml 또는 json
-                'blogName' : 'https://me2designer.tistory.com'
-            },
-            type : {
-                post : 'https://www.tistory.com/apis/post/list?',
-                category : 'https://www.tistory.com/apis/category/list?'
-            },
-            callback : function(){}
-        }
-        arg = mergeDeep(default_option, arg);
-        arg.count = arg.count == undefined ? '' : '&count='+arg.count;
-        arg.page = arg.page == undefined ? '' : '&page='+arg.page;
+  google.charts.load('current', { packages: ['corechart'] })
+    .then(() => {
+      let query = new google.visualization.Query(`http://spreadsheets.google.com/tq?key=${myKey}&pub=1`);
 
-        let arrType = Object.entries(arg.type)
-        let datas = {}
-        let Y;
-
-        arrType.forEach(function(each) {
-            let xhr = new XMLHttpRequest();
-            xhr.open('GET', each[1]+'access_token='+arg.pars.accessToken+'&output='+arg.pars.outputType+'&blogName='+arg.pars.blogName+'&visibility=0'+arg.count+arg.page);
-            xhr.send();
-            xhr.onload = function () {
-                if (xhr.status >= 200 && xhr.status < 300) {
-                    datas[each[0]] = each[0] == 'post' ? JSON.parse(xhr.response).tistory.item : JSON.parse(xhr.response).tistory.item.categories;
-
-                    if (Y) arg.callback(datas);
-
-                    Y = true;
-                } else {
-                    console.log('failed');
-                }
-            };
-        });
-    }
-
-    /* 코딩블로그 */
-    const $wrap = $('#blog');
-    let $tbody = $wrap.find('.table tbody');
-    let tr_copied = $tbody.find('tr').detach();
-    var $paging = $wrap.find('.table-pagination');
-    var bullet_copied = $paging.find('.table-pagination-bullet').detach();
-
-    getTistory({
-        count : 4,
-        page : 1,
-        callback : function(infoList){
-            list(infoList);
-        }
-    })
-
-    // table clone()
-    const list = function(infoList) {
-        let cate_filter = id => (infoList.category.filter(object => object.id == id)[0].name);
-
-        infoList.post.posts.forEach(function(each){
-            let $tr_clone = tr_copied.clone();
-            $tr_clone.find('.cate').text(cate_filter(each.categoryId));
-            $tr_clone.find('.tit').text(each.title)
-            $tr_clone.find('.date').text(each.date.substr(0, 10))
-            $tr_clone.appendTo($tbody);
-
-            if (each.visibility !== '0') {
-                $tr_clone.on('click', function(){
-                    window.open('about:blank').location.href=each.postUrl;
-                });
-            } else {
-                $tr_clone.attr('data-disable','true').on('click', function() {
-                    LAYER({
-                        name : 'alert',
-                        text : '현재 열람이 불가합니다.'
-                    })
-                });
-            }
-        });
-
-        // 말줄임
-        $tbody.find('.tit').lineClamp(1);
-
-        // clone() - 페이징
-        let total = infoList.post.totalCount / infoList.post.count;
-
-        for (let i = 0; i < total; i++) {
-            let $bullet_clone = bullet_copied.clone();
-            let page = i+1;
-
-            $bullet_clone.attr('data-page-number',page).text(page);
-            if (page == infoList.post.page) $bullet_clone.addClass('on');
-            $bullet_clone.appendTo($paging)
+      query.send((response) => {
+        if (response.isError()) {
+          console.error('Error in query: ' + response.getMessage() + ' ' + response.getDetailedMessage());
+          return;
         }
 
-        $paging.find('.table-pagination-bullet:not(.on)').on('click', function(){
-            let page = $(this).attr('data-page-number');
+        let dataTable = response.getDataTable().toJSON();
+        let jsonData = JSON.parse(dataTable);
+        let cols = jsonData.cols.map((col) => col.label);
+        let rows = jsonData.rows.map(row => {
+          let newRow;
 
-            getTistory({
-                count : 4,
-                page : page,
-                callback : function(newInfoList){
-                    $tbody.find('tr').remove();
-                    $paging.find('.table-pagination-bullet').remove();
+          row.c.forEach((obj, index) => {
+            if (obj == null || obj == undefined) return; //빈값이 경우 정지
+            obj[cols[index]] = ('f' in obj) ? obj['f'] : obj['v'];
+            ['f', 'v'].forEach(each => delete obj[each]);
+            newRow = {...newRow, ...obj};
+          });
 
-                    list(newInfoList);
-                }
-            });
+          return newRow;
         })
+
+        runTableDate(rows) // table 생성시작
+    });
+  });
+
+   const $wrap = $('#blog');
+   let $tbody = $wrap.find('.table tbody');
+   let $tr_copied = $tbody.find('tr').detach();
+   let $paging = $wrap.find('.table-pagination');
+   let $bullet_copied = $paging.find('.table-pagination-bullet').detach();
+
+  const runTableDate = totalList => {
+    let default_options = {
+      totalData: totalList.length, //총 데이터 수
+      dataPerPage: 4, //한 페이지에 나타낼 글 수
+      pageCount: 4, //페이징에 나타낼 페이지 수
+      currentPage: 1, //현재 페이지
     }
+
+    // 글목록 호출
+    totalList.sort(() => Math.random() - 0.5); // array 랜덤 섞기
+    let splitList = totalList.arrDivision(default_options.dataPerPage);
+
+    const loadList = index => {
+      $tbody.find('tr').remove();
+
+      // clone() - 글목록
+      splitList[--index].forEach(each => {
+        let $tr_clone = $tr_copied.clone();
+
+        $tr_clone.find('.cate').text(each.tag);
+        $tr_clone.find('.tit').text(each.title);
+        $tr_clone.find('.date').text(each.date);
+        $tr_clone.on('click', e => window.open('about:blank').location.href=each.url)
+        $tr_clone.appendTo($tbody);
+      });
+    }
+    loadList(default_options.currentPage);
+
+    // 페이징 호출
+    const loadPaging = opt => {
+      $paging.find('.table-pagination-bullet').remove();
+
+      opt.totalPage = Math.ceil(opt.totalData / opt.dataPerPage); // 총 페이지 수
+      opt.currentGroup = Math.ceil(opt.currentPage / opt.pageCount); // 현재 페이지 그룹
+
+      let lastNum = (opt.totalPage < opt.pageCount * opt.currentGroup) ? opt.totalPage : opt.pageCount * opt.currentGroup;
+      let firstNum = opt.currentGroup * opt.pageCount - (opt.pageCount - 1);
+
+      // clone() - 페이징
+      for (let i = firstNum; i <= lastNum; i++) {
+        let $bullet_clone = $bullet_copied.clone();
+        $bullet_clone.text(i);
+
+        if (opt.currentPage === i) $bullet_clone.addClass('on');
+
+        // Click
+        $bullet_clone.on('click', e => {
+          let pageNum = Number($(e.target).text());
+          opt.currentPage = pageNum;
+
+          // reset
+          loadList(opt.currentPage);
+          loadPaging(opt);
+        });
+
+        $bullet_clone.insertBefore('.table-pagination-next');
+      }
+
+      // $btnPrev
+      let $btnPrev = $paging.find('.table-pagination-prev');
+      let prevNum = firstNum - 1;
+
+      if (opt.currentGroup === 1) $btnPrev.addClass('disable').off('click').on('click', e => e.preventDefault());
+      else {
+        $btnPrev.removeClass('disable').off('click').on('click', e => {
+          opt.currentPage = prevNum;
+
+          // reset
+          loadList(opt.currentPage);
+          loadPaging(opt);
+        });
+      }
+
+      // $btnNext
+      let $btnNext = $paging.find('.table-pagination-next');
+      let nextNum = lastNum + 1;
+
+      if (lastNum >= opt.totalPage) $btnNext.addClass('disable').off('click').on('click', e => e.preventDefault());
+      else {
+        $btnNext.removeClass('disable').off('click').on('click', e => {
+          opt.currentPage = nextNum;
+
+          // reset
+          loadList(opt.currentPage);
+          loadPaging(opt);
+        });
+      }
+    }
+    loadPaging(default_options);
+  }
 
 
 
